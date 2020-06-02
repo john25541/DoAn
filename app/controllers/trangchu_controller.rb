@@ -1,0 +1,2 @@
+class TrangchuController < ApplicationController
+end

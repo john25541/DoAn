@@ -1,0 +1,2 @@
+class Loaisanpham < ApplicationRecord
+end

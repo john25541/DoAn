@@ -1,0 +1,2 @@
+class Chitietsp < ApplicationRecord
+end

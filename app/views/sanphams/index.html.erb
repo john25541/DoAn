@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sanphams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sanphams.each do |sanpham| %>
+      <tr>
+        <td><%= link_to 'Show', sanpham %></td>
+        <td><%= link_to 'Edit', edit_sanpham_path(sanpham) %></td>
+        <td><%= link_to 'Destroy', sanpham, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sanpham', new_sanpham_path %>
