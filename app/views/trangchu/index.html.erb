@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%= csrf_meta_tags %>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- SCSS -->
+    <%= stylesheet_link_tag 'trangchu', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'trangchu', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  <div id="menu">
+    <div class="title">
+      Sản phẩm
+    </div>
+  </div>
+  <div class = "container col-md-9">
+    <div class="row">
+      <%@sanpham.each do |sanpham|%>
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <div class="card">
+          <%=sanpham.tensanpham%>
+          <br>
+          <%=sanpham.giaban%>
+          <br>
+          <% if sanpham.giakhuyenmai == 0 %>
+            <%else%>
+            <%= sanpham.giakhuyenmai%> 
+          <%end%>
+        </div>
+        <br>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  </body>
+</html>

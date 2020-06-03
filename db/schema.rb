@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20200602104559) do
   enable_extension "plpgsql"
 
   create_table "chitietsps", primary_key: "machitietsp", id: :string, force: :cascade do |t|
-    t.string "masp"
+    t.string "sanpham_id"
     t.string "mausp"
     t.string "size"
     t.text "hinhanhsp"
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(version: 20200602104559) do
   end
 
   create_table "loaisanphams", primary_key: "maloai", id: :string, force: :cascade do |t|
-    t.string "madanhmucsp"
+    t.string "danhmuc_id"
     t.string "tenloai"
   end
 
   create_table "sanphams", primary_key: "masanpham", id: :string, force: :cascade do |t|
-    t.string "maloaisp"
-    t.string "mathuonghieusp"
+    t.string "loaisanpham_id"
+    t.string "thuonghieu_id"
     t.string "tensanpham"
     t.decimal "giaban"
     t.decimal "giakhuyenmai"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20200602104559) do
     t.string "emailthuonghieu"
   end
 
-  add_foreign_key "chitietsps", "sanphams", column: "masp", primary_key: "masanpham", name: "fk_chitietsp_sanpham"
-  add_foreign_key "loaisanphams", "danhmucs", column: "madanhmucsp", primary_key: "madanhmuc", name: "fk_loaisp_danhmuc"
-  add_foreign_key "sanphams", "loaisanphams", column: "maloaisp", primary_key: "maloai", name: "fk_sanpham_loaisp"
-  add_foreign_key "sanphams", "thuonghieus", column: "mathuonghieusp", primary_key: "mathuonghieu", name: "fk_sanpham_thuonghieu"
+  add_foreign_key "chitietsps", "sanphams", primary_key: "masanpham", name: "fk_chitietsp_sanpham"
+  add_foreign_key "loaisanphams", "danhmucs", primary_key: "madanhmuc", name: "fk_loaisp_danhmuc"
+  add_foreign_key "sanphams", "loaisanphams", primary_key: "maloai", name: "fk_sanpham_loaisp"
+  add_foreign_key "sanphams", "thuonghieus", primary_key: "mathuonghieu", name: "fk_sanpham_thuonghieu"
 end

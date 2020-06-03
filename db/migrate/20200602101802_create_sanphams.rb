@@ -2,8 +2,8 @@ class CreateSanphams < ActiveRecord::Migration[5.1]
   def change
     create_table :sanphams, { id: false }  do |t|
       t.string :masanpham
-      t.string :maloaisp
-      t.string :mathuonghieusp
+      t.string :loaisanpham_id
+      t.string :thuonghieu_id
       t.string :tensanpham
       t.decimal :giaban
       t.decimal :giakhuyenmai

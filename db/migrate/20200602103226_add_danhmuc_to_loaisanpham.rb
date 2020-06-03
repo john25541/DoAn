@@ -3,7 +3,7 @@ class AddDanhmucToLoaisanpham < ActiveRecord::Migration[5.1]
     execute <<-SQL
       ALTER TABLE loaisanphams
         ADD CONSTRAINT fk_loaisp_danhmuc
-        FOREIGN KEY (madanhmucsp)
+        FOREIGN KEY (danhmuc_id)
         REFERENCES danhmucs(madanhmuc)
     SQL
   end
