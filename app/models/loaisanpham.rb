@@ -1,2 +1,3 @@
 class Loaisanpham < ApplicationRecord
+    
 end
