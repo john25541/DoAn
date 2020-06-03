@@ -4,7 +4,5 @@ class TrangchuController < ApplicationController
     @sanpham.each do |sanpham|
       @hinhanhsp = Sanpham.includes(:chitietsps).where(masanpham: sanpham.masanpham).first
     end
-    binding.pry
-    
   end
 end

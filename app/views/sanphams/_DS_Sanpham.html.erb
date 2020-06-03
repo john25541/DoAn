@@ -1,0 +1,33 @@
+<% if @hinhanhsp.empty? %>
+<div class="container" style="padding:300px; text-align:center">
+    <%=link_to(image_tag( 'home.png'),root_path) %>
+    Không có sản phẩm !!!
+    <div style="display: flex; color:rgb(255, 255, 255); justify-content: center;">
+        <%= link_to "Tiếp tục mua sắm", root_path,{style: "background-color: rgb(255, 47, 47); padding: 5px 12px; color: #fff; border-radius: 10px;" } %>
+    </div>
+</div>
+<% else %>
+<%end%>
+<%@hinhanhsp.each do |sp|%>
+<div class="col-xs-6 col-sm-3 col-md-3">
+    <div class="pitem">
+        <input type="hidden" value="-420000">
+        <%=link_to(image_tag( sp.chitietsps.hinhanhsp, style: "width:270px;height:366px;"),product_path(sp))unless sp.chitietsps.hinhanhsp.blank? %>
+        <!-- Show same product by color_image -->
+        <div class="row mt-2">
+            <div class="col-12 col-sm-12">
+                <div class="pull-left">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 text-center">
+            <p class="price">
+                <span style="text-decoration:line-through"><%=sp.chitietsps.giaban %></span>
+            </p>
+        </div>
+    </div>
+</div>
+<%end%>

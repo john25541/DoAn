@@ -8,38 +8,25 @@
         <%= link_to 'Trang Chủ', root_path , {class: 'nav-link'}%>
       </li>
       <li class="nav-item">
-        <%= link_to 'New', products_path(pro: "New") , {class: 'nav-link'}%>
+        <%= link_to 'New', sanphams_path(pro: "New") , {class: 'nav-link'}%>
       </li>
       <li class="nav-item">
-        <%= link_to 'Sản Phẩm', products_path , {class: 'nav-link'}%>
+        <%= link_to 'Sale', sanphams_path(pro: "Sale") , {class: 'nav-link'}%>
       </li>
-      <li class="nav-item">
-        <div class="dropdown">
-          <div id="navbarDropdownMenuLink">
-            <%= link_to 'Nam ', products_path(sex: "Nam") , class:"nav-link dropdown-toggle"%>
+      <%@danhmuc.each do |cate|%>
+        <li class="nav-item">
+          <div class="dropdown">
+            <div id="navbarDropdownMenuLink">
+              <%= link_to cate.tendanhmuc, sanphams_path(sex: "Nam") , class:"nav-link dropdown-toggle"%>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <%cate.loaisanphams.each do |type|%>
+                <%= link_to type.tenloai, sanphams_path(name: cate.tendanhmuc, sex: "Nam"), {class: 'dropdown-item'}%>
+              <%end%>
+            </div>
           </div>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%@category1.each do |cate|%>
-              <%= link_to cate.name, products_path(category_id: cate.id, name: cate.name, sex: "Nam"), {class: 'dropdown-item'}%>
-            <%end%>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="dropdown">
-          <div id="navbarDropdownMenuLink">
-            <%= link_to 'Nữ ', products_path(sex: "Nữ") , class:"nav-link dropdown-toggle"%>
-          </div>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%@category2.each do |cate|%>
-              <%= link_to cate.name, products_path(category_id: cate.id, name: cate.name, sex: "Nữ"), {class: 'dropdown-item'}%>
-            <%end%>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Sale', products_path(pro: "Sale") , {class: 'nav-link'}%>
-      </li>
+        </li>
+      <%end%>
     </ul>
   </div>
   <form class="form-inline my-2 my-lg-0">
@@ -71,26 +58,6 @@
         </div>
       </div>
     </div>
-    <%if user_signed_in?%>
-      <div class="dropdown">
-        <div id="navbarDropdownMenuLink">
-          <%= form_for current_user, url: users_update_info_path, html: { method: :put } do |f|%>
-            <% if current_user.avatar.file.nil? %>
-              <%= image_tag("acount.png", class:"img  img-thumbnail")%>
-            <%else%>
-              <%= image_tag(current_user.avatar, class:"img  img-thumbnail ")%>
-            <%end%>
-          <%end%>
-        </div>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <%= link_to 'Tài Khoản', users_profile_path, class: 'dropdown-item'%>
-          <%= link_to 'Đơn Hàng', orders_path, class: 'dropdown-item'%>
-          <div class="dropdown-divider"></div>
-          <%= link_to 'Đăng Xuất', destroy_user_session_path, method: :delete , class: 'dropdown-item'%>
-        </div>
-      </div>
-    <%else%>
-      <%= link_to 'Đăng Nhập', new_user_session_path, class: 'nav-link' ,style: 'margin-top:5px; white-space: nowrap;'%>
-    <%end%>
+      <%= link_to 'Đăng Nhập', root_path, class: 'nav-link' ,style: 'margin-top:5px; white-space: nowrap;'%>
   </form>
 </div>
