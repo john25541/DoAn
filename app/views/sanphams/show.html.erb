@@ -1,4 +1,24 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_sanpham_path(@sanpham) %> |
-<%= link_to 'Back', sanphams_path %>
+<div class="container-main container-fluid col-11">
+  <div class="row">
+    <div class="col-12">
+      <div class="breadcrumb" style="weight: 945px; fornt-height:35px;">
+        <%=link_to(image_tag( 'home.png'),root_path) %>
+        <span class="mx-2 mb-0">/</span>
+        <strong class="text-black"><%=@product.tensanpham%></strong>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class = "row">
+    <%=render "chitietsanpham"%>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="breadcrumb">
+        <h5>MÔ TẢ SẢN PHẨM</h5>
+      </div>
+      <p><%=raw @product.mota%></p>
+    </div>
+  </div>
+</div>

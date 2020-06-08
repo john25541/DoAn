@@ -27,6 +27,23 @@ body>td {
     margin: 8px !important
 }
 
+.img-fluid_pro {
+  max-width: auto;
+  max-height: 615px;
+}
+
+.pitem img:hover {
+  -webkit-transform: scale(1.03);
+  /* Safari and Chrome */
+  -moz-transform: scale(1.03);
+  /* Firefox */
+  -ms-transform: scale(1.03);
+  /* IE 9 */
+  -o-transform: scale(1.03);
+  /* Opera */
+  transform: scale(1.03);
+}
+
 #navbarText {
     font-size: 18px;
     background-color: rgb(0, 0, 0);

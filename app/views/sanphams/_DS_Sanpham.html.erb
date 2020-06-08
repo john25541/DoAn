@@ -1,4 +1,4 @@
-<% if @hinhanhsp.empty? %>
+<% if @pro_img.empty? %>
 <div class="container" style="padding:300px; text-align:center">
     <%=link_to(image_tag( 'home.png'),root_path) %>
     Không có sản phẩm !!!
@@ -8,7 +8,7 @@
 </div>
 <% else %>
 <%end%>
-<%@hinhanhsp.each do |sp|%>
+<%@pro_img.each do |sp|%>
 <div class="col-xs-6 col-sm-3 col-md-3">
     <div class="pitem">
         <input type="hidden" value="-420000">

@@ -3,72 +3,58 @@ class SanphamsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    sanpham = Sanpham.all
+    products = Sanpham.all
     # Gender condition
-    gender = params[:sex] == "Nam" ? 0 : 1
+    gender = params[:sex] == 'Nam' ? 0 : 1
     # Get datetime
     time = Time.now
-    zone = time.strftime("%Y/%m/%d %H:%M")
+    zone = time.strftime('%Y/%m/%d %H:%M')
     # Show product by conditions
-    if params[:pro] == "New"
-      sanpham.each do |sp|
-        @hinhanhsp = Sanpham.includes(:chitietsps).where(":zone::date - created_at::date <= 30", zone: zone, masanpham: sp.masanpham)
+    if params[:pro] == 'New'
+      products.each do |sp|
+        @pro_img = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
       end
-      @bread = "New"
-    elsif params[:pro] == "Sale"
-      sanpham.each do |sp|
-        @hinhanhsp = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+      @bread = 'New'
+    elsif params[:pro] == 'Sale'
+      products.each do |sp|
+        @pro_img = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
       end
-      @bread = "Sale"
+      @bread = 'Sale'
     elsif params[:category_id].nil?
-      sanpham.each do |sp|
-        @hinhanhsp = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+      products.each do |sp|
+        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
       end
       @bread = params[:sex]
     else
-      sanpham.each do |sp|
-        @hinhanhsp = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, category_id: params[:category_id], gender: gender)
+      products.each do |sp|
+        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, category_id: params[:category_id], gender: gender)
       end
       @bread = params[:name]
       @gen = params[:sex]
     end
 
     # Pagination
- 
+
     # products by same names
-    
   end
 
-  # GET /products/1
-  # GET /products/1.json
   def show
-  end
+    @product = Sanpham.includes(:chitietsps).find(params[:id])
+    @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:mau])
+    @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:mau])
+    @product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)
 
-  def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html {
-          redirect_to @product,
-                      notice: "Product was successfully updated."
-        }
-        format.json { render :show, status: :ok, location: @product }
-        @products = Product.all
-        ActionCable.server.broadcast "products",
-                                     html: render_to_string("home/index", layout: false)
-      else
-        format.html { render :edit }
-        format.json {
-          render json: @product.errors,
-                 status: :unprocessable_entity
-        }
-      end
+    @image_product_same = {}
+    @product_same_name.each do |product_detail|
+      @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
+    # binding.pry
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_product
-    @product = Product.find(params[:id])
+    @product = Sanpham.find(params[:id])
   end
 end

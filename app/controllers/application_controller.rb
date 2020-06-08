@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   private
   # ----Method load category by gender
   def load_header
-    @danhmuc = Danhmuc.includes(:loaisanphams)
+    @category = Danhmuc.includes(:loaisanphams)
   end
 
 end
