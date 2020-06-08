@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20200602104559) do
     t.string "size"
     t.text "hinhanhsp"
     t.integer "soluongton"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "danhmucs", primary_key: "madanhmuc", id: :string, force: :cascade do |t|

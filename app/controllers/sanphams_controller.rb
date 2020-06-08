@@ -5,34 +5,45 @@ class SanphamsController < ApplicationController
   def index
     products = Sanpham.all
     # Gender condition
-    gender = params[:sex] == 'Nam' ? 0 : 1
+    gender = params[:sex] == 'Thời Trang Nam' ? 0 : 1
     # Get datetime
     time = Time.now
     zone = time.strftime('%Y/%m/%d %H:%M')
     # Show product by conditions
     if params[:pro] == 'New'
+     @array_product_follow_category = []
       products.each do |sp|
-        @pro_img = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
+        pro_cate = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
+         @array_product_follow_category << pro_cate
       end
       @bread = 'New'
     elsif params[:pro] == 'Sale'
+     @array_product_follow_category = []
       products.each do |sp|
-        @pro_img = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+        pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+       @array_product_follow_category << pro_cate
       end
       @bread = 'Sale'
-    elsif params[:id].nil?
+    elsif params[:category_id].nil?
+     @array_product_follow_category = []
       products.each do |sp|
-        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+       @array_product_follow_category << pro_cate
       end
       @bread = params[:sex]
     else
+     @array_product_follow_category = []
       products.each do |sp|
-        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id], category_id: params[:category_id], gender: gender)
+       @array_product_follow_category << pro_cate
       end
       @bread = params[:name]
       @gen = params[:sex]
     end
 
+   @array_product_follow_category.delete_if(&:blank?)
+
+    # binding.pry
     # Pagination
 
     # products by same names
