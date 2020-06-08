@@ -5,7 +5,7 @@
         <%=link_to image_tag('home.png'), root_path %>
         <span class="mx-2 mb-0">/</span>
         <% if @gen.present? %>
-          <%= link_to @gen, products_path(sex: @gen), class: "fw-normal" %>
+          <%= link_to @gen, sanphams_path(sex: @gen), class: "fw-normal" %>
           <span class="mx-2 mb-0">/</span>
           <strong class="text-black"><%=@bread%></strong>
         <% else %>
@@ -17,6 +17,6 @@
  
   <!-- Show products by condition -->
   <div class="row">
-    <%= render partial: "DS_Sanpham", locals: {pro_same: @pro_img} %>
+    <%= render partial: "DS_Sanpham", locals: {pro_img: @pro_img} %>
   </div>
 </div>
