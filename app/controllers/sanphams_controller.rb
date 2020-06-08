@@ -20,14 +20,14 @@ class SanphamsController < ApplicationController
         @pro_img = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
       end
       @bread = 'Sale'
-    elsif params[:category_id].nil?
+    elsif params[:id].nil?
       products.each do |sp|
         @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
       end
       @bread = params[:sex]
     else
       products.each do |sp|
-        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, category_id: params[:category_id], gender: gender)
+        @pro_img = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
       end
       @bread = params[:name]
       @gen = params[:sex]

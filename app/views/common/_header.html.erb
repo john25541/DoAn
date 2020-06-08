@@ -17,11 +17,11 @@
         <li class="nav-item">
           <div class="dropdown">
             <div id="navbarDropdownMenuLink">
-              <%= link_to cate.tendanhmuc, sanphams_path(sex: "Nam") , class:"nav-link dropdown-toggle"%>
+              <%= link_to cate.tendanhmuc, sanphams_path(sex: cate.tendanhmuc) , class:"nav-link dropdown-toggle"%>
             </div>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <%cate.loaisanphams.each do |type|%>
-                <%= link_to type.tenloai, sanphams_path(name: cate.tendanhmuc, sex: "Nam"), {class: 'dropdown-item'}%>
+                <%= link_to type.tenloai, sanphams_path(id: type.maloai, sex: cate.tendanhmuc, name: type.tenloai), {class: 'dropdown-item'}%>
               <%end%>
             </div>
           </div>
