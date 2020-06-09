@@ -1,0 +1,50 @@
+<% if @array_product_follow_category.empty? %>
+  <div class="container" style="padding:300px; text-align:center">
+    <%=link_to(image_tag( 'home.png'),root_path) %>
+    Không có sản phẩm !!!
+    <div style="display: flex; color:rgb(255, 255, 255); justify-content: center;">
+        <%= link_to "Tiếp tục mua sắm", root_path,{style: "background-color: rgb(255, 47, 47); padding: 5px 12px; color: #fff; border-radius: 10px;" } %>
+    </div>
+  </div>
+<% else %>
+  <%@array_product_follow_category.each do |array_product_follow_category|%>
+    <%array_product_follow_category.each do |product_follow_category|%>
+    <div class="col-xs-6 col-sm-3 col-md-3">
+      <div class="pitem">
+        <input type="hidden" value="-420000">
+        <%@product_details = Sanpham.includes(:chitietsps).where(masanpham: product_follow_category.masanpham).last%>
+        <%=link_to (image_tag @product_details.chitietsps.last.hinhanhsp ,class: "img-fluid"), sanpham_path(@product_details, color: @product_details.chitietsps.last.mausp)%>
+        <!-- Show same product by color_image -->
+        <div class="row mt-4">
+          <div class = "col-12 col-sm-12">
+            <!-- all image details for product class = "image_border" -->
+            <%product_details_all = Chitietsp.where(sanpham_id: product_follow_category.masanpham)%>
+            <%hash_image = Hash.new%>
+            <%product_details_all.each do |details_of_product|%>
+              <%hash_image[details_of_product.mausp] = details_of_product.hinhanhsp%>
+            <%end%>
+            <%hash_image.each do |key, values|%>
+              <%= link_to ( image_tag values, class: "small_image_color"), sanpham_path(@product_details, color:key)%>
+            <%end%>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-sm-12 font-weight-bold">
+            <%=link_to product_follow_category.tensanpham, sanpham_path(@product_details, mau: @product_details.chitietsps.last.mausp),  class: "fw-normal"%>
+          </div>
+          <div class="col-12 col-sm-12">
+            <p class="price">
+              <%if product_follow_category.giakhuyenmai.nil? || product_follow_category.giakhuyenmai == 0 %>
+                <span><%= product_follow_category.giaban %></span>
+              <%else%>
+                <span style="text-decoration:line-through"><%=product_follow_category.giaban %></span>
+                <span style="color:#ff0000"><%=product_follow_category.giakhuyenmai%></span>
+              <%end%>
+            </p> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <%end%>
+  <%end%>
+<%end%>

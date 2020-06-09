@@ -1,5 +1,7 @@
 class TrangchuController < ApplicationController
   def index
-    @product = Sanpham.all
+    @products = Sanpham.all
+    
+    # binding.pry
   end
 end
