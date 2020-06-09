@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200602104559) do
+ActiveRecord::Schema.define(version: 20200609061458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chitietdathangs", primary_key: ["chitietsp_id", "dondathang_id"], force: :cascade do |t|
+    t.string "chitietsp_id", null: false
+    t.string "dondathang_id", null: false
+    t.integer "soluong"
+    t.decimal "thanhtien"
+    t.index ["chitietsp_id", "dondathang_id"], name: "index_chitietdathangs_on_chitietsp_id_and_dondathang_id", unique: true
+  end
 
   create_table "chitietsps", primary_key: "machitietsp", id: :string, force: :cascade do |t|
     t.string "sanpham_id"
@@ -27,6 +35,26 @@ ActiveRecord::Schema.define(version: 20200602104559) do
 
   create_table "danhmucs", primary_key: "madanhmuc", id: :string, force: :cascade do |t|
     t.string "tendanhmuc"
+  end
+
+  create_table "dondathangs", primary_key: "madondathang", id: :string, force: :cascade do |t|
+    t.text "ghichu"
+    t.date "ngaydathang"
+    t.date "ngaygiaohang"
+    t.string "tinhtrang"
+    t.decimal "tongtien"
+  end
+
+  create_table "khachhangs", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_khachhangs_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_khachhangs_on_reset_password_token", unique: true
   end
 
   create_table "loaisanphams", primary_key: "maloai", id: :string, force: :cascade do |t|
@@ -51,6 +79,8 @@ ActiveRecord::Schema.define(version: 20200602104559) do
     t.string "emailthuonghieu"
   end
 
+  add_foreign_key "chitietdathangs", "chitietsps", primary_key: "machitietsp", name: "fk_chitietdathang_chitietsp"
+  add_foreign_key "chitietdathangs", "dondathangs", primary_key: "madondathang", name: "fk_chitietdathang_dondathang"
   add_foreign_key "chitietsps", "sanphams", primary_key: "masanpham", name: "fk_chitietsp_sanpham"
   add_foreign_key "loaisanphams", "danhmucs", primary_key: "madanhmuc", name: "fk_loaisp_danhmuc"
   add_foreign_key "sanphams", "loaisanphams", primary_key: "maloai", name: "fk_sanpham_loaisp"
