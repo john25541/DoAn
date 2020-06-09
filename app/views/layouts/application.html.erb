@@ -8,9 +8,9 @@
   </head>
   <body>
     <%=render "common/header"%>
-    <%= yield %>
-    <br>
-    <br>
-    <%=render "common/footer" %>
+    <div class="main main-container">
+      <%= yield %>
+    </div>
+    <%=render "common/footer"%>
   </body>
 </html>
