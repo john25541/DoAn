@@ -1,8 +1,53 @@
-class SanphamsController < ApplicationController
-  before_action :set_sanpham, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
+class SanphamsController < ApplicationController
+  before_action :set_product, only: %i[show]
+  # GET /products
+  # GET /products.json
   def index
-    @products = Sanpham.all
+    products = Sanpham.all
+    # Gender condition
+    gender = params[:sex] == 'Thời Trang Nam' ? 0 : 1
+    # Get datetime
+    time = Time.now
+    zone = time.strftime('%Y/%m/%d %H:%M')
+    # Show product by conditions
+    if params[:pro] == 'New'
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
+        @array_product_follow_category << pro_cate
+      end
+      @bread = 'New'
+    elsif params[:pro] == 'Sale'
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+        @array_product_follow_category << pro_cate
+      end
+      @bread = 'Sale'
+    elsif params[:id].nil?
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+        @array_product_follow_category << pro_cate
+      end
+      @bread = params[:sex]
+    else
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id], gioitinh: gender)
+        @array_product_follow_category << pro_cate
+      end
+      @bread = params[:name]
+      @gen = params[:sex]
+    end
+
+    @array_product_follow_category.delete_if(&:blank?)
+
+    # Pagination
+
+    # products by same names
   end
 
   def show
@@ -19,13 +64,9 @@ class SanphamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sanpham
-      @sanpham = Sanpham.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sanpham_params
-      params.fetch(:sanpham, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Sanpham.find(params[:id])
+  end
 end
