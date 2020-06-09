@@ -52,14 +52,15 @@ class SanphamsController < ApplicationController
 
   def show
     @product = Sanpham.includes(:chitietsps).find(params[:id])
-    @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:mau])
-    @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:mau])
+    @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:color])
+    @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
     product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)
 
-    @image_product_same = {}
+    @image_product_same = Hash.new
     product_same_name.each do |product_detail|
       @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
+    # binding.pry
   end
 
   private
