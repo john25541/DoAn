@@ -13,6 +13,11 @@ gem 'pry', '~> 0.12.2'
 
 gem 'devise'
 
+gem 'cancancan'
+
+gem 'activeadmin'
+
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
