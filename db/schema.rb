@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200609061458) do
+ActiveRecord::Schema.define(version: 20200610025451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(version: 20200609061458) do
     t.string "hinhanhthuonghieu"
     t.string "diachithuonghieu"
     t.string "emailthuonghieu"
+  end
+
+  create_table "tintucs", primary_key: "matintuc", id: :string, force: :cascade do |t|
+    t.string "tieude"
+    t.datetime "ngaybatdau"
+    t.datetime "ngayketthuc"
+    t.text "mota"
+    t.string "hinhanhtintuc"
   end
 
   add_foreign_key "chitietdathangs", "chitietsps", primary_key: "machitietsp", name: "fk_chitietdathang_chitietsp"
