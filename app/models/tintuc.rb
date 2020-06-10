@@ -1,0 +1,2 @@
+class Tintuc < ApplicationRecord
+end

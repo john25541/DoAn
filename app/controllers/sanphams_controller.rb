@@ -12,20 +12,20 @@ class SanphamsController < ApplicationController
     time = Time.now
     zone = time.strftime('%Y/%m/%d %H:%M')
     # Show product by conditions
-    if params[:pro] == 'New'
-      @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
-        @array_product_follow_category << pro_cate
-      end
-      @bread = 'New'
-    elsif params[:pro] == 'Sale'
+    if params[:pro] == 'Sale'
       @array_product_follow_category = []
       products.each do |sp|
         pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sale'
+    elsif params[:sex].nil?
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham)
+        @array_product_follow_category << pro_cate
+      end
+      @bread = 'Sản phẩm'
     elsif params[:id].nil?
       @array_product_follow_category = []
       products.each do |sp|
