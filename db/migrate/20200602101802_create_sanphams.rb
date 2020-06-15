@@ -7,7 +7,6 @@ class CreateSanphams < ActiveRecord::Migration[5.1]
       t.string :tensanpham
       t.decimal :giaban
       t.decimal :giakhuyenmai
-      t.boolean :gioitinh
       t.text :mota
     end
     execute ("ALTER TABLE sanphams ADD PRIMARY KEY (masanpham)")
