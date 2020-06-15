@@ -1,0 +1,5 @@
+<%session[:cart].each do |product_from_cart|%>
+  <%=product_from_cart%>
+  <%=link_to 'Remove', '#'%>
+  <br>
+<%end%>

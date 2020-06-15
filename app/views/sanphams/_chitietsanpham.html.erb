@@ -21,20 +21,21 @@
         <table class="table table-condensed" style = "min-height: 300px;">
           <tbody>
             <%@product_details_all.each do |product_detail|%>
+              <%@product_detail = product_detail%>
               <tr>
-                <td><%= product_detail.id %></td>
-                <td><%= product_detail.mausp %></td>
-                <td><%= product_detail.size %></td>
-                <% if product_detail.soluongton <= 0 %>
+                <td><%= @product_detail.machitietsp %></td>
+                <td><%= @product_detail.mausp %></td>
+                <td><%= @product_detail.size %></td>
+                <% if @product_detail.soluongton <= 0 %>
                   <td style=" padding-left:86px">
                     <h5 style="color:#ff0000"> Hết Hàng </h5>
                   </td>
                 <% else %>
                   <td class="text-right">
-                    <%= button_to 'Thêm Vào Giỏ Hàng', remote: true %>
+                    <%= link_to 'Thêm Vào Giỏ Hàng', add_to_cart_path(machitietsp: @product_detail.machitietsp), method: :post%>
                   </td>
                   <td class="text-right">
-                    <%= button_to 'Mua Ngay', class: "btn btn-dark" %>
+                    <%= link_to 'Mua Ngay', class: "btn btn-dark" %>
                   </td>
                 <% end %>
               </tr>

@@ -1,7 +1,9 @@
-# frozen_string_literal: true
-
 class SanphamsController < ApplicationController
+  
+  before_action :initialize_session
+  before_action :increment_visit_count, only: %i[:show, :about]
   before_action :set_product, only: %i[show]
+  
   # GET /products
   # GET /products.json
   def index
@@ -12,20 +14,20 @@ class SanphamsController < ApplicationController
     time = Time.now
     zone = time.strftime('%Y/%m/%d %H:%M')
     # Show product by conditions
-    if params[:pro] == 'New'
-      @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(':zone::date - created_at::date <= 30', zone: zone, masanpham: sp.masanpham)
-        @array_product_follow_category << pro_cate
-      end
-      @bread = 'New'
-    elsif params[:pro] == 'Sale'
+    if params[:pro] == 'Sale'
       @array_product_follow_category = []
       products.each do |sp|
         pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sale'
+    elsif params[:sex].nil?
+      @array_product_follow_category = []
+      products.each do |sp|
+        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham)
+        @array_product_follow_category << pro_cate
+      end
+      @bread = 'Sản phẩm'
     elsif params[:id].nil?
       @array_product_follow_category = []
       products.each do |sp|
@@ -63,7 +65,27 @@ class SanphamsController < ApplicationController
     # binding.pry
   end
 
+  def cart
+    session[:cart]
+  end
+
+  def add_to_cart
+    session[:cart] << params[:machitietsp]
+
+   redirect_to cart_path
+    
+  end
   private
+
+  def initialize_session
+   session[:visit_count] ||= 0
+   session[:cart] ||= [] 
+  end
+
+  def increment_visit_count
+    session[:vivit_count] +=1
+    @visit_count = session[:vivit_count] 
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_product

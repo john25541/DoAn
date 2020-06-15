@@ -16,6 +16,10 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'activeadmin'
+gem 'font-awesome-sass', '~> 4.2.0'
+gem "font-awesome-rails"
+
+
 
 
 

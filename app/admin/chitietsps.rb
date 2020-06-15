@@ -1,18 +1,34 @@
 ActiveAdmin.register Chitietsp do
+  permit_params :machitietsp,:sanpham_id,:mausp,:size ,:hinhanhsp,:soluongton
+  index do
+    selectable_column
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :machitietsp, :sanpham_id, :mausp, :size, :hinhanhsp, :soluongton
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:machitietsp, :sanpham_id, :mausp, :size, :hinhanhsp, :soluongton]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+    column :machitietsp
+    column :sanpham_id
+    column :mausp
+    column :size 
+    column :hinhanhsp
+    column :soluongton
+
+    actions
+  end
+    filter :machitietsp
+    filter :sanpham_id
+    filter :mausp
+    filter :size 
+    filter :hinhanhsp
+    filter :soluongton
+
+  form do |f|
+    f.inputs do
+      f.input :machitietsp, label: 'Mã chi tiết sản phẩm'
+      f.input :sanpham_id, label: 'sản phẩm', as: :select, :collection => Sanpham.all.map{|sanpham| [sanpham.tensanpham, sanpham.masanpham]}
+      f.input :mausp, label: 'Màu'
+      f.input :size , label: 'size'
+      f.input :hinhanhsp, label: 'Hình ảnh'
+      f.input :soluongton, label: 'Số Lượng'
+    end
+    f.actions
+  end
   
 end

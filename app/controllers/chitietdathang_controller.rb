@@ -1,2 +1,3 @@
 class ChitietdathangController < ApplicationController
+    
 end

@@ -19,6 +19,8 @@
 
 // @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 body,
 body>p,
 body>ol,
@@ -32,6 +34,12 @@ body>td {
     max-height: 615px;
 }
 
+.fa-google-plus-square {
+    font-size: 50px;
+    margin-left: 10px;
+    color: #FFC312;
+}
+
 .img-fluid {
     width: auto;
     max-height: 450px;
@@ -41,8 +49,8 @@ body>td {
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-right: 5px;
 }
 
@@ -74,7 +82,6 @@ body>td {
     .nav-item {
         white-space: nowrap;
         .img_cart {
-            padding-top: -5px;
             // margin-top: -14px;
             width: 60px;
             height: 60px;

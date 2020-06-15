@@ -8,9 +8,6 @@
         <%= link_to 'Trang Chủ', root_path , {class: 'nav-link'}%>
       </li>
       <li class="nav-item">
-        <%= link_to 'New', sanphams_path(pro: "New") , {class: 'nav-link'}%>
-      </li>
-      <li class="nav-item">
         <%= link_to 'Sale', sanphams_path(pro: "Sale") , {class: 'nav-link'}%>
       </li>
       <%@category.each do |cate|%>
@@ -21,7 +18,7 @@
             </div>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <%cate.loaisanphams.each do |type|%>
-                <%= link_to type.tenloai, sanphams_path(id: type.maloai, sex: cate.tendanhmuc, name: type.tenloai), {class: 'dropdown-item'}%>
+                <%= link_to type.tenloai, sanphams_path(id: type.maloai, sex: cate.tendanhmuc), {class: 'dropdown-item'}%>
               <%end%>
             </div>
           </div>
@@ -31,13 +28,16 @@
   </div>
   <form class="form-inline my-2 my-lg-0">
     <form class="form-inline d-flex justify-content-center md-form form-sm ">
-      <input id="tags" class="form-control form-control-sm mr-3 col-md-auto" type="text" aria-label="Search" size=40 style="width: 100%; margin-bottom:10px; margin-top:10px" >
+      <input id="tags" class="form-control form-control-sm mr-3 col-md-auto" type="text" aria-label="Search" size=40 style="width: auto; margin-bottom:10px; margin-top:10px" >
       <%# <i class="fas fa-search" aria-hidden="true"></i> %>
     </form>
-    <div class="nav-item" style="margin-top:-29px">
-      <%= link_to image_tag("cart_.png", class: 'img_cart'), @cart %>
-      <div class="dropdown">
-        <div id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+  </form>
+  <div >
+    <span >
+      <i class="fab fa-google-plus-square"></i>
+    </span>
+    <div class="dropdown">
+      <div id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
           <div id="add_to_cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display:none; background-color:#fff; width:200px; height:50px; border: 2px solid #000;text-align:center; margin-top:20px; margin-left:-30px; ">
             <i class="fas fa-check-circle" style="color:rgb(102, 255, 0);"></i>
             <span class="align-middle" >
@@ -55,9 +55,10 @@
               <% end %>
             </div>
           </div>
-        </div>
       </div>
     </div>
+  </div>
+  <div>
     <%if khachhang_signed_in?%>
       <div class="dropdown">
         <div id="navbarDropdownMenuLink">
@@ -67,5 +68,5 @@
     <%else%>
       <%= link_to 'Đăng Nhập', new_khachhang_session_path, class: 'nav-link' ,style: 'margin-top:5px; white-space: nowrap;'%>
     <%end%>
-  </form>
+  </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200610034526) do
+ActiveRecord::Schema.define(version: 20200611052225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20200610034526) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cthoadonnhaps", id: false, force: :cascade do |t|
+    t.string "mmasanphamnhap"
+    t.string "tensanphamnhap"
+    t.integer "soluongnhap"
+    t.decimal "dongia"
+  end
+
   create_table "danhmucs", primary_key: "madanhmuc", id: :string, force: :cascade do |t|
     t.string "tendanhmuc"
   end
@@ -69,6 +76,14 @@ ActiveRecord::Schema.define(version: 20200610034526) do
     t.date "ngaygiaohang"
     t.string "tinhtrang"
     t.decimal "tongtien"
+  end
+
+  create_table "hoadonnhaps", id: false, force: :cascade do |t|
+    t.string "mahoadonnhap"
+    t.date "ngapnhap"
+    t.decimal "thanhtien"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "khachhangs", force: :cascade do |t|
@@ -88,6 +103,14 @@ ActiveRecord::Schema.define(version: 20200610034526) do
     t.string "tenloai"
   end
 
+  create_table "nhacungcaps", id: false, force: :cascade do |t|
+    t.string "mancc"
+    t.string "tenncc"
+    t.string "sdtncc"
+    t.string "diachincc"
+    t.string "emailncc"
+  end
+
   create_table "sanphams", primary_key: "masanpham", id: :string, force: :cascade do |t|
     t.string "loaisanpham_id"
     t.string "thuonghieu_id"
@@ -103,6 +126,14 @@ ActiveRecord::Schema.define(version: 20200610034526) do
     t.string "hinhanhthuonghieu"
     t.string "diachithuonghieu"
     t.string "emailthuonghieu"
+  end
+
+  create_table "tintucs", primary_key: "matintuc", id: :string, force: :cascade do |t|
+    t.string "tieude"
+    t.datetime "ngaybatdau"
+    t.datetime "ngayketthuc"
+    t.text "mota"
+    t.string "hinhanhtintuc"
   end
 
   add_foreign_key "chitietdathangs", "chitietsps", primary_key: "machitietsp", name: "fk_chitietdathang_chitietsp"
