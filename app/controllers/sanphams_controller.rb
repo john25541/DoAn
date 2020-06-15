@@ -15,28 +15,30 @@ class SanphamsController < ApplicationController
     if params[:pro] == 'Sale'
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+        pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sale'
     elsif params[:sex].nil?
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham)
+        pro_cate = Sanpham.where(masanpham: sp.masanpham)
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sản phẩm'
     elsif params[:id].nil?
       @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+      category = Danhmuc.includes(loaisanphams: :sanphams).where(tendanhmuc: params[:sex])
+      category.each do |cate|
+        pro_cate = cate.sanphams
         @array_product_follow_category << pro_cate
       end
       @bread = params[:sex]
+      
     else
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id], gioitinh: gender)
+        pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
         @array_product_follow_category << pro_cate
       end
       @bread = params[:name]

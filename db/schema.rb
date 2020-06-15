@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20200610025451) do
     t.string "tensanpham"
     t.decimal "giaban"
     t.decimal "giakhuyenmai"
-    t.boolean "gioitinh"
     t.text "mota"
   end
 
