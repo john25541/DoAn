@@ -1,7 +1,9 @@
-# frozen_string_literal: true
-
 class SanphamsController < ApplicationController
+  
+  before_action :initialize_session
+  before_action :increment_visit_count, only: %i[:show, :about]
   before_action :set_product, only: %i[show]
+  before_action :authenticate_khachhang! , only: :add_to_cart
   # GET /products
   # GET /products.json
   def index
@@ -65,7 +67,28 @@ class SanphamsController < ApplicationController
     # binding.pry
   end
 
+  def cart
+    session[:cart]
+  end
+
+  def add_to_cart
+  code_product_detail = params[:machitietsp]
+  session[:cart] << code_product_detail unless session[:cart].inlude?(code_product_detail)
+  redirect_to cart_path
+    
+  end
+
+
   private
+  def initialize_session
+   session[:visit_count] ||= 0
+   session[:cart] ||= [] 
+  end
+
+  def increment_visit_count
+    session[:vivit_count] +=1
+    @visit_count = session[:vivit_count] 
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_product

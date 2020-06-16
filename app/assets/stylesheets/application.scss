@@ -19,6 +19,8 @@
 
 // @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 body,
 body>p,
 body>ol,
@@ -30,6 +32,12 @@ body>td {
 .img-fluid_pro {
     max-width: auto;
     max-height: 615px;
+}
+
+.fa-google-plus-square {
+    font-size: 50px;
+    margin-left: 10px;
+    color: #FFC312;
 }
 
 .img-fluid {
@@ -74,7 +82,6 @@ body>td {
     .nav-item {
         white-space: nowrap;
         .img_cart {
-            padding-top: -5px;
             // margin-top: -14px;
             width: 60px;
             height: 60px;

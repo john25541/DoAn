@@ -1,6 +1,8 @@
 class TrangchuController < ApplicationController
   def index
     @products = Sanpham.all
+    
+
     # Add news into Home Page
     time = Time.now
     zone = time.strftime("%Y/%m/%d %H:%M")
