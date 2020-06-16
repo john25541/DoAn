@@ -29,6 +29,17 @@ body>td {
     margin: 8px !important
 }
 
+.col-md-4 .col-md-12 table tbody {
+    padding: 10px;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.row .col-md-4 .col-md-12 {
+    padding-right: 0;
+    border-left: 2px solid #ccc;
+}
+
 .img-fluid_pro {
     max-width: auto;
     max-height: 615px;
