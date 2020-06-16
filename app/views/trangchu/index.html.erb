@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <%@news.each_with_index do |val, index|%>
         <li data-target="#carouselExampleIndicators" data-slide-to= '<%= index %>' class="<%= "active" if index.zero?%>"></li>
@@ -23,7 +23,7 @@
     </ol>
     <div class="carousel-inner">
       <%@news.each_with_index do |val, index|%>
-        <%if index.zero?%>
+        <% if index.zero? %>
           <div class="carousel-item active">
             <%=link_to(image_tag(val.hinhanhtintuc , class:"d-block w-100", alt: val.tieude), sanphams_path) if val.hinhanhtintuc.present? and !File.file?(val.hinhanhtintuc)%>
           </div>
@@ -101,5 +101,4 @@
     </div>
   </div>
 </body>
-
 </html>

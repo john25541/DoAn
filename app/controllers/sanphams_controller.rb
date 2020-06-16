@@ -3,7 +3,7 @@ class SanphamsController < ApplicationController
   before_action :initialize_session
   before_action :increment_visit_count, only: %i[:show, :about]
   before_action :set_product, only: %i[show]
-  
+  before_action :authenticate_khachhang! , only: :add_to_cart
   # GET /products
   # GET /products.json
   def index
@@ -17,28 +17,30 @@ class SanphamsController < ApplicationController
     if params[:pro] == 'Sale'
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+        pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sale'
     elsif params[:sex].nil?
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham)
+        pro_cate = Sanpham.where(masanpham: sp.masanpham)
         @array_product_follow_category << pro_cate
       end
       @bread = 'Sản phẩm'
     elsif params[:id].nil?
       @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, gioitinh: gender)
+      category = Danhmuc.includes(loaisanphams: :sanphams).where(tendanhmuc: params[:sex])
+      category.each do |cate|
+        pro_cate = cate.sanphams
         @array_product_follow_category << pro_cate
       end
       @bread = params[:sex]
+      
     else
       @array_product_follow_category = []
       products.each do |sp|
-        pro_cate = Sanpham.includes(:chitietsps).where(masanpham: sp.masanpham, loaisanpham_id: params[:id], gioitinh: gender)
+        pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
         @array_product_follow_category << pro_cate
       end
       @bread = params[:name]
@@ -70,13 +72,14 @@ class SanphamsController < ApplicationController
   end
 
   def add_to_cart
-    session[:cart] << params[:machitietsp]
-
-   redirect_to cart_path
+  code_product_detail = params[:machitietsp]
+  session[:cart] << code_product_detail unless session[:cart].inlude?(code_product_detail)
+  redirect_to cart_path
     
   end
-  private
 
+
+  private
   def initialize_session
    session[:visit_count] ||= 0
    session[:cart] ||= [] 
