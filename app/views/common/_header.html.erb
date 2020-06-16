@@ -44,17 +44,6 @@
               "Thêm thành công!"  
             </span>
           </div>
-          <div class= "rounded-circle">
-            <div id="cart" 
-                <% if @cart.nil?%>
-                    0
-                <% end %>
-                  >
-              <% unless @cart.nil?%>
-                <%= @cart.line_items.count%>
-              <% end %>
-            </div>
-          </div>
       </div>
     </div>
   </div>

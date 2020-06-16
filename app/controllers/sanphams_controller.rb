@@ -1,7 +1,9 @@
 class SanphamsController < ApplicationController
   
   before_action :initialize_session
-  before_action :increment_visit_count, only: %i[:show, :about]
+  before_action :increment_visit_count, only: %i[:show, :cart]
+  before_action :load_cart
+  before_action :load_product_from_cart
   before_action :set_product, only: %i[show]
   before_action :authenticate_khachhang! , only: :add_to_cart
   # GET /products
@@ -73,7 +75,7 @@ class SanphamsController < ApplicationController
 
   def add_to_cart
   code_product_detail = params[:machitietsp]
-  session[:cart] << code_product_detail unless session[:cart].inlude?(code_product_detail)
+  session[:cart] << code_product_detail unless session[:cart].include?(code_product_detail)
   redirect_to cart_path
     
   end
@@ -85,11 +87,22 @@ class SanphamsController < ApplicationController
    session[:cart] ||= [] 
   end
 
+  def load_cart
+    @cart = Chitietsp.includes(:sanpham).find(session[:cart])
+    
+    # binding.pry
+    
+    # binding.pry
+  end
+  def load_product_from_cart
+    # @product_from_cart = Sanpham.find(masanpham: @cart.sanpham_id)
+  end
   def increment_visit_count
     session[:vivit_count] +=1
     @visit_count = session[:vivit_count] 
   end
-
+  
+  
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Sanpham.find(params[:id])
