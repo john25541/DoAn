@@ -5,23 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'bootstrap', '~> 4.0.0'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-
-gem 'pry', '~> 0.12.2'
-
-gem 'devise'
-
-gem 'cancancan'
-
-gem 'activeadmin'
-gem 'font-awesome-sass', '~> 4.2.0'
-gem "font-awesome-rails"
-
-
-
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'
@@ -51,9 +34,27 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+#============================ASSETS GEM==================================
+
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+
+gem 'bootstrap', '~> 4.0.0'
+
+gem 'jquery-rails'
+
+gem 'jquery-ui-rails'
+
+gem 'devise'
+
+gem 'cancancan'
+
+gem 'activeadmin'
+
+#===============================================================
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'pry'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'

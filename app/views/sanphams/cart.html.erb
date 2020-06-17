@@ -1,4 +1,4 @@
-<div class = "container-fluid col-md-8 " style= "min-height: 580px;">
+<div class = "container-fluid col-md-8" style= "min-height: 580px;">
 <br>
   <div class = "row">
     <div class = "col-md-8 col-sm-8">
@@ -23,7 +23,7 @@
             <td><%=product_detail.size%></td>
             <td></td>
             <td></td>
-            <td><%link_to "Xóa", "#"%></td>
+            <td><%=link_to "Xóa", remove_from_cart_path(product_detail), method: :delete%></td>
         </tbody>
         <%end%>
       </table>
@@ -35,7 +35,7 @@
           <tbody>
             <tr>
               <td class = "col-sm-8">Tổng sản phẩm</td>
-              <td class = "col-sm-4">2</td>
+              <td class = "col-sm-4">...</td>
             </tr>
             <tr>
               <td class = "col-sm-8">Thành Tiền</td>
