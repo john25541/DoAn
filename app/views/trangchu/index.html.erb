@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <%@news.each_with_index do |val, index|%>
         <li data-target="#carouselExampleIndicators" data-slide-to= '<%= index %>' class="<%= "active" if index.zero?%>"></li>
