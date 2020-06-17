@@ -98,22 +98,8 @@ class SanphamsController < ApplicationController
 
   def load_cart
     @cart = Chitietsp.includes(:sanpham).find(session[:cart])
-<<<<<<< Updated upstream
   end
 
-=======
-  end
-  def load_product_from_cart
-    # @product_from_cart = Sanpham.find(masanpham: @cart.sanpham_id)
-  end
-
-  def increment_visit_count
-    session[:visit_count] +=1
-    @visit_count = session[:visit_count] 
-  end
-  
-  # Use callbacks to share common setup or constraints between actions.
->>>>>>> Stashed changes
   def set_product
     @product = Sanpham.find(params[:id])
   end
