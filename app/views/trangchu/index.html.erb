@@ -64,20 +64,20 @@
         <div class="pitem">
           <!-- Show product by image -->
           <%@product_details = Sanpham.includes(:chitietsps).where(masanpham: product.masanpham).last%>
-          <%=link_to (image_tag @product_details.chitietsps.last.hinhanhsp ,class: "img-fluid"), sanpham_path(@product_details, color: @product_details.chitietsps.last.mausp)%>
+          <%=link_to (image_tag @product_details.chitietsps.last.hinhanhsp ,class: "img-fluid d-block w-100"), sanpham_path(@product_details, color: @product_details.chitietsps.last.mausp)%>
           <!-- all image details for product class = "image_border" -->
           <div class="row mt-2">
             <div class="col-12 col-sm-12">
-              <div class="pull-left circular">
-                <%product_details_all = Chitietsp.where(sanpham_id: product.masanpham)%>
-                <%hash_image = {}%>
-                <%product_details_all.each do |details_of_product|%>
-                <%hash_image[details_of_product.mausp] = details_of_product.hinhanhsp%>
-                <%end%>
-                <%hash_image.each do |key, values|%>
-                <%= link_to ( image_tag values, class: "small_image_color"),sanpham_path(@product_details, color: key)%>
-                <%end%>
-              </div>
+              <%product_details_all = Chitietsp.where(sanpham_id: product.masanpham)%>
+              <%hash_image = {}%>
+              <%product_details_all.each do |details_of_product|%>
+              <%hash_image[details_of_product.mausp] = details_of_product.hinhanhsp%>
+              <%end%>
+              <%hash_image.each do |key, values|%>
+                <div class="pull-left circular">
+                  <%= link_to ( image_tag values, class: "small_image_color"),sanpham_path(@product_details, color: key)%>
+                </div>
+              <%end%>
             </div>
           </div>
           <div class="row mt-2">
@@ -87,10 +87,10 @@
             <div class="col-12 col-sm-12">
               <p class="price">
                 <%if product.giakhuyenmai.nil? || product.giakhuyenmai == 0 %>
-                <span><%= product.giaban %></span>
+                <span><%= number_to_currency(product.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
                 <%else%>
-                <span style="text-decoration:line-through"><%=product.giaban %></span>
-                <span style="color:#ff0000"><%=product.giakhuyenmai%></span>
+                <span style="text-decoration:line-through"><%= number_to_currency(product.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
+                <span style="color:#ff0000"><%= number_to_currency(product.giakhuyenmai, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
                 <%end%>
               </p>
             </div>

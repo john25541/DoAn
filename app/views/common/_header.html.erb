@@ -8,7 +8,7 @@
         <%= link_to 'Trang Chủ', root_path , {class: 'nav-link'}%>
       </li>
       <li class="nav-item">
-        <%= link_to 'Sale', sanphams_path(pro: "Sale") , {class: 'nav-link'}%>
+        <%= link_to 'Sale', sanphams_path(pro: 'Sale') , {class: 'nav-link'}%>
       </li>
       <%@category.each do |cate|%>
         <li class="nav-item">
@@ -18,7 +18,7 @@
             </div>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <%cate.loaisanphams.each do |type|%>
-                <%= link_to type.tenloai, sanphams_path(id: type.maloai, sex: cate.tendanhmuc), {class: 'dropdown-item'}%>
+                <%= link_to type.tenloai, sanphams_path(id: type.maloai, sex: cate.tendanhmuc, name: type.tenloai), {class: 'dropdown-item'}%>
               <%end%>
             </div>
           </div>

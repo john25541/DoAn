@@ -1,48 +1,53 @@
 <div class="col-md-4">
   <div>
-    <%=image_tag @product_detail.hinhanhsp ,class: "img-fluid_pro"%>
+    <%=image_tag @product_detail.hinhanhsp ,class: "img-fluid"%>
   </div>
 </div>
 <div class="col-md-8">
   <div class="ditem">
     <div class="row" >
       <div class="col-md-8" >
-        <h2>
-          <%=@product.tensanpham%>
-        </h2>
-        <h4 class="text-black"></h4>
-        <h4 class="price">
+        <h3 class="text"><%=@product.tensanpham%></h3>
+        <h4 class="price-detail">
           <% if @product.giakhuyenmai.nil? || @product.giakhuyenmai == 0 %>
-            <%= @product.giaban%>đ
+            <%= number_to_currency(@product.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup>
           <% else %>
-            <%= @product.giakhuyenmai %>đ <span style="text-decoration:line-through; color:#ff0000"><%= @product.giaban %>đ</span>
+            <%= number_to_currency(@product.giakhuyenmai, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup> <span style="text-decoration:line-through; color:#ff0000"><%= number_to_currency(@product.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u") %><sup style="font-style: unset;">đ</sup></span>
           <% end %>
-        </h4>
-        <table class="table table-condensed" style = "min-height: 300px;">
-          <tbody>
+        </h5>
+        <div class= "flex flex-column">
+          <div class="flex items-center">
+            <span class="text-black">Màu sắc:</span>
+            <span class="product-color-text"><%= @product_detail.mausp %></span><label class="required"><em>&nbsp;*</em></label>
+          </div>
+          <div class="flex items-center">   
+            <span class="text-black">Size:</span>
+          </div>
+          <div class="flex items-center top"> 
             <%@product_details_all.each do |product_detail|%>
-              <%@product_detail = product_detail%>
-              <tr>
-                <td><%= @product_detail.machitietsp %></td>
-                <td><%= @product_detail.mausp %></td>
-                <td><%= @product_detail.size %></td>
-                <% if @product_detail.soluongton <= 0 %>
-                  <td style=" padding-left:86px">
-                    <h5 style="color:#ff0000"> Hết Hàng </h5>
-                  </td>
-                <% else %>
-                  
-                  <td class="text-right">
-                    <%= link_to 'Thêm Vào Giỏ Hàng', add_to_cart_path(machitietsp: @product_detail.machitietsp), method: :post%>
-                  </td>
-                  <td class="text-right">
-                    <%= link_to 'Mua Ngay', class: "btn btn-dark" %>
-                  </td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+              <%= link_to '', class: "product-size", remote: true do%> <%= product_detail.size %>
+              <%end%>
+            <%end%>
+          </div>
+          <div class="flex items-center">   
+            <span class="text-black">Số lượng:</span>
+            <span style="margin-right: 15px;">
+              <%= link_to '', class: "number-input md-number-input", remote: true do%>
+                <i class="fa fa-minus" aria-hidden="true"></i> 
+                <input class="quantity" type="number" min="1" value="1">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              <%end%>
+            </span>
+          </div>
+          <div class="flex items-center topv"> 
+              <%= link_to '', class: "button_to buy", remote: true do%>
+                <i class="fa fa-shopping-basket bg" aria-hidden="true"></i>  Thêm Vào Giỏ Hàng
+              <%end%>
+              <%= link_to '', class: "button_to now", remote: true do%>  Mua Ngay
+              <%end%>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <hr>
