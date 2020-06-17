@@ -1,5 +1,4 @@
 class SanphamsController < ApplicationController
-  
   before_action :set_product, only: %i[show]
   before_action :initialize_session
   before_action :load_cart
@@ -7,51 +6,57 @@ class SanphamsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    products = Sanpham.all
-    # Gender condition
-    gender = params[:sex] == 'Thời Trang Nam' ? 0 : 1
-    # Get datetime
-    time = Time.now
-    zone = time.strftime('%Y/%m/%d %H:%M')
+    @products = Sanpham.all
     # Show product by conditions
     if params[:pro] == 'Sale'
-      @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
-        @array_product_follow_category << pro_cate
-      end
-      @bread = 'Sale'
+      showProSale 
     elsif params[:sex].nil?
-      @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.where(masanpham: sp.masanpham)
-        @array_product_follow_category << pro_cate
-      end
-      @bread = 'Sản phẩm'
-    elsif params[:id].nil?
-      @array_product_follow_category = []
-      category = Danhmuc.includes(loaisanphams: :sanphams).where(tendanhmuc: params[:sex])
-      category.each do |cate|
-        pro_cate = cate.sanphams
-        @array_product_follow_category << pro_cate
-      end
-      @bread = params[:sex]
-      
+      showProducts 
+    elsif params[:name].nil?
+      showProGender
     else
-      @array_product_follow_category = []
-      products.each do |sp|
-        pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
-        @array_product_follow_category << pro_cate
-      end
-      @bread = params[:name]
-      @gen = params[:sex]
+      showProType
     end
-
     @array_product_follow_category.delete_if(&:blank?)
-
     # Pagination
+  end
 
-    # products by same names
+  def showProSale
+    @array_product_follow_category = []
+    @products.each do |sp|
+      pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
+      @array_product_follow_category << pro_cate
+    end
+    @bread = params[:pro]
+  end
+
+  def showProducts
+    @array_product_follow_category = []
+    @products.each do |sp|
+      pro_cate = Sanpham.where(masanpham: sp.masanpham)
+      @array_product_follow_category << pro_cate
+    end
+    @bread = 'Sản phẩm'
+  end
+
+  def showProGender
+    @array_product_follow_category = []
+    category = Danhmuc.includes(loaisanphams: :sanphams).where(tendanhmuc: params[:sex])
+    category.each do |cate|
+      pro_cate = cate.sanphams
+      @array_product_follow_category << pro_cate
+    end
+    @bread = params[:sex]
+  end
+
+  def showProType
+    @array_product_follow_category = []
+    @products.each do |sp|
+      pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
+      @array_product_follow_category << pro_cate
+    end
+    @bread = params[:name]
+    @gen = params[:sex]
   end
 
   def show
@@ -60,7 +65,7 @@ class SanphamsController < ApplicationController
     @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
     product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)
 
-    @image_product_same = Hash.new
+    @image_product_same = {}
     product_same_name.each do |product_detail|
       @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
@@ -93,8 +98,22 @@ class SanphamsController < ApplicationController
 
   def load_cart
     @cart = Chitietsp.includes(:sanpham).find(session[:cart])
+<<<<<<< Updated upstream
   end
 
+=======
+  end
+  def load_product_from_cart
+    # @product_from_cart = Sanpham.find(masanpham: @cart.sanpham_id)
+  end
+
+  def increment_visit_count
+    session[:visit_count] +=1
+    @visit_count = session[:visit_count] 
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+>>>>>>> Stashed changes
   def set_product
     @product = Sanpham.find(params[:id])
   end
