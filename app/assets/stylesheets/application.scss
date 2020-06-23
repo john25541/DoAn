@@ -19,6 +19,7 @@
 
 // @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 body,
 body>p,
 body>ol,
@@ -358,16 +359,112 @@ body>td {
     color: #c54d4d;
 }
 
-// @media all and (max-width: 800px) {
-//   #columns {
-//     flex-direction: column-reverse;
-//   }
-// }
-// @media all and (max-width: 500px) {
-//   #banner {
-//     height: 1em;
-//   }
-//   #banner .title {
-//     display: none;
-//   }
-// }
+.text-black {
+    color: #000;
+    font-weight: bold;
+}
+
+.text {
+    color: #5c5454;
+    margin-bottom: 20px;
+}
+
+.price-detail {
+    color: #ee4266;
+    margin-bottom: 20px;
+}
+
+.required {
+    color: #F00;
+}
+
+.flex.items-center.top {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.flex.items-center.topv {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.product-color-text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 97%;
+    font-style: oblique;
+    vertical-align: baseline;
+}
+
+#product-size-text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 97%;
+    vertical-align: baseline;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.button-productDetails {
+    margin-bottom: 20px;
+}
+
+.button_to {
+    border-radius: 5px;
+    margin-left: 30px;
+    padding: 8px 13px;
+    border: 1px solid #f54d4d;
+    background: rgba(255, 87, 34, .1);
+}
+
+.button_to.buy {
+    color: #f54d4d;
+    font-size: 15px;
+}
+
+.button_to.buy:hover {
+    text-decoration: none;
+    background: rgba(255, 87, 34, .15);
+}
+
+.button_to.now {
+    color: #fff;
+    background: #ee4d2d;
+    font-size: 15px;
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+.button_to.now:hover {
+    text-decoration: none;
+    background: #f05d40;
+}
+
+.fa.fa-shopping-basket.bg {
+    margin-right: 5px;
+    color: #ee4d2d;
+    stroke: #ee4d2d;
+}
+
+.product-size {
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px 30px 5px 30px;
+    margin: 0px 10px 10px 10px;
+    color: rgba(0, 0, 0, .8);
+    text-align: left;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .09);
+    position: relative;
+    background: #fff;
+    outline: 0;
+    word-break: break-word;
+}
+
+.product-size:hover {
+    text-decoration: none;
+    color: #ee4d2d;
+    border-color: #ee4d2d;
+}

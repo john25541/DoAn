@@ -72,7 +72,7 @@ class SanphamsController < ApplicationController
   end
 
   def add_to_cart
-
+  
   code_product_detail = params[:machitietsp]
   session[:cart] << code_product_detail unless session[:cart].include?(code_product_detail)
 

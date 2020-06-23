@@ -16,3 +16,25 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+function incrementValue() {
+    var value = parseInt(document.getElementById('number').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('number').value = value;
+}
+
+function decrementValue() {
+    var value = parseInt(document.getElementById('number').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('number').value = value;
+}
+
+function selectProductSize() {
+    var arr = [];
+    $('.ads_Checkbox:checked').each(function() {
+        arr += $(this).val();
+    });
+    return arr;
+}
