@@ -20,7 +20,7 @@
             <td><%=image_tag product_detail.hinhanhsp, :style => "max-width:100px; max-height:130px;"%></td>
             <td><%=product_detail.sanpham.tensanpham%></td>
             <td><%=product_detail.mausp%></td>
-            <td><%=product_detail.size%></td>
+            <td id = "arr_size"></td>
             <td></td>
             <td></td>
             <td><%=link_to "Xóa", remove_from_cart_path(product_detail), method: :delete%></td>

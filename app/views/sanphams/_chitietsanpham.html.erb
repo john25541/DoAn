@@ -6,7 +6,7 @@
 <div class="col-md-8">
   <div class="ditem">
     <div class="row" >
-      <div class="col-md-8" >
+      <div class="col-md-12" >
         <h3 class="text"><%=@product.tensanpham%></h3>
         <h4 class="price-detail">
           <% if @product.giakhuyenmai.nil? || @product.giakhuyenmai == 0 %>
@@ -23,29 +23,32 @@
           <div class="flex items-center">   
             <span class="text-black">Size:</span>
           </div>
-          <div class="flex items-center top"> 
-            <%@product_details_all.each do |product_detail|%>
-              <%= link_to '', class: "product-size", remote: true do%> <%= product_detail.size %>
+          <div class="flex items-center top">
+            <div class="row">
+              <%@product_details_all.each do |product_detail|%>
+                <label class="btn btn-default">
+                  <input class = "ads_Checkbox" type="checkbox"  value="<%=product_detail.size%>" ><%=product_detail.size%>
+                </label>
               <%end%>
-            <%end%>
+            </div>
           </div>
-          <div class="flex items-center">   
-            <span class="text-black">Số lượng:</span>
-            <span style="margin-right: 15px;">
-              <%= link_to '', class: "number-input md-number-input", remote: true do%>
-                <i class="fa fa-minus" aria-hidden="true"></i> 
-                <input class="quantity" type="number" min="1" value="1">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              <%end%>
-            </span>
+          </div>
+          <div class="flex items-center">
+            <div class = "row">
+              <span class="text-black">Số lượng:</span>
+              <span style="margin-right: 15px;">
+                <i  onclick="decrementValue()" class="fa fa-minus" aria-hidden="true"></i> 
+                <input id="number" type="number" value="1">
+                <i onclick="incrementValue()" class="fa fa-plus" aria-hidden="true"></i>
+              </span >
+            </div>
           </div>
           <div class="flex items-center topv"> 
-              <%= link_to '', class: "button_to buy", remote: true do%>
-                <i class="fa fa-shopping-basket bg" aria-hidden="true"></i>  Thêm Vào Giỏ Hàng
-              <%end%>
-              <%= link_to '', class: "button_to now", remote: true do%>  Mua Ngay
-              <%end%>
-            </p>
+            <%= button_to add_to_cart_path(masanpham: @product.masanpham , color: @product_detail.mausp) , onclick: "selectProductSize()" , class: "button_to buy" do%>
+              <i class="fa fa-shopping-basket bg" aria-hidden="true">Thêm Vào Giỏ Hàng</i>
+            <%end%>
+            <%= link_to add_to_cart_path(sanpham_id: @product.masanpham , color: @product_detail.mausp, ) , onclick: "selectProductSize()"  do%>  Mua Ngay
+            <%end%>
           </div>
         </div>
       </div>

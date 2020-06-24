@@ -9,18 +9,10 @@ ActiveAdmin.register Sanpham do
     column :tensanpham
     column :giaban
     column :giakhuyenmai
-    column :gioitinh 
     column :mota
   
     actions
   end
-  filter :masanpham
-  filter :loaisanpham_id
-  filter :thuonghieu_id
-  filter :tensanpham
-  filter :giaban
-  filter :giakhuyenmai
-  filter :gioitinh
 
   form do |f|
     f.inputs do
@@ -30,7 +22,6 @@ ActiveAdmin.register Sanpham do
       f.input :tensanpham, label: "Tên sản phẩm"
       f.input :giaban , label: "Giá bán"
       f.input :giakhuyenmai, label: "Giá Khuyến mãi"
-      f.input :gioitinh, label: "Giới Tính", as: :select, :collection => ["Nam", "Nữ"].map{|gender| [gender]}
       f.input :mota , label: "Mô tả"
     end
     f.actions

@@ -50,6 +50,8 @@ gem 'cancancan'
 
 gem 'activeadmin'
 
+gem "font-awesome-rails"
+
 #===============================================================
 
 group :development, :test do
