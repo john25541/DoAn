@@ -43,3 +43,10 @@ function selectProductSize() {
       }
     });
 }
+
+$(function() {
+    $("#sort_paginate_ajax .justify-content-end a").on("click", function(){
+      $.getScript(this.href);
+      return false;
+    });
+});

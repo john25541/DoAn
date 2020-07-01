@@ -26,9 +26,7 @@
           <div class="flex items-center top">
             <div class="row">
               <%@product_details_all.each do |product_detail|%>
-                <label class="btn btn-default">
-                  <input class = "ads_Checkbox" type="checkbox"  value="<%=product_detail.size%>" ><%=product_detail.size%>
-                </label>
+                <%= check_box_tag "arr_size[]", product_detail.size -%><%= product_detail.size -%>
               <%end%>
             </div>
           </div>

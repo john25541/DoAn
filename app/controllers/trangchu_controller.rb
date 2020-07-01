@@ -1,7 +1,6 @@
 class TrangchuController < ApplicationController
   def index
-    @products = Sanpham.all
-    
+    @products = Sanpham.all.paginate(page: params[:page], per_page: 19)
 
     # Add news into Home Page
     time = Time.now

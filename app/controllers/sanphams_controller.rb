@@ -1,4 +1,5 @@
 class SanphamsController < ApplicationController
+  require 'will_paginate/array'
   before_action :set_product, only: %i[show]
   before_action :initialize_session
   before_action :load_cart
@@ -9,16 +10,15 @@ class SanphamsController < ApplicationController
     @products = Sanpham.all
     # Show product by conditions
     if params[:pro] == 'Sale'
-      showProSale 
+      showProSale
     elsif params[:sex].nil?
-      showProducts 
+      showProducts
     elsif params[:name].nil?
       showProGender
     else
       showProType
     end
-    @array_product_follow_category.delete_if(&:blank?)
-    # Pagination
+    showBrands if params[:brand].present?
   end
 
   def showProSale
@@ -27,6 +27,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
       @array_product_follow_category << pro_cate
     end
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = params[:pro]
   end
 
@@ -36,6 +38,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where(masanpham: sp.masanpham)
       @array_product_follow_category << pro_cate
     end
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = 'Sản phẩm'
   end
 
@@ -46,6 +50,8 @@ class SanphamsController < ApplicationController
       pro_cate = cate.sanphams
       @array_product_follow_category << pro_cate
     end
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = params[:sex]
   end
 
@@ -55,8 +61,22 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
       @array_product_follow_category << pro_cate
     end
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)  
+    @array_product_follow_category.delete_if(&:blank?)  
     @bread = params[:name]
     @gen = params[:sex]
+  end
+
+  def showBrands
+    @array_product_follow_category = []
+    brand = Thuonghieu.includes(:sanphams).where(tenthuonghieu: params[:brand])
+    brand.each do |br|
+      pro_cate = br.sanphams
+      @array_product_follow_category << pro_cate
+    end
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)  
+    @array_product_follow_category.delete_if(&:blank?)  
+    @bread = params[:brand]
   end
 
   def show

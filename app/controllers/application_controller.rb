@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   # ----Method load category
   def load_header
     @category = Danhmuc.includes(:loaisanphams)
+    @brand = Thuonghieu.includes(:sanphams)
   end
 
 end
