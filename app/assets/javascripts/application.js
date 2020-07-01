@@ -16,3 +16,37 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+function incrementValue() {
+    var value = parseInt(document.getElementById('number').value);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('number').value = value;
+}
+
+function decrementValue() {
+    var value = parseInt(document.getElementById('number').value);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('number').value = value;
+}
+
+function selectProductSize() {
+    $('.ads_Checkbox:checked').each(function() {
+        var index;
+        var arr = "";
+        var size = [];
+        arr += $(this).val();
+        size = arr.split(",");
+        for (index = 0; index < size.length; ++index) {
+            $('#arr_size').val(size[index]);
+      }
+    });
+}
+
+$(function() {
+    $("#sort_paginate_ajax .justify-content-end a").on("click", function(){
+      $.getScript(this.href);
+      return false;
+    });
+});

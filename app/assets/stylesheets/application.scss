@@ -19,6 +19,7 @@
 
 // @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 body,
 body>p,
 body>ol,
@@ -126,6 +127,7 @@ body>td {
     .dropdown-menu {
         margin-top: -3px;
         background-color: black;
+        text-transform: capitalize;
     }
     .dropdown-item {
         color: #fff;
@@ -346,30 +348,32 @@ body>td {
 }
 
 .scrollToTop {
-    margin: 0;
+    margin: 0px;
     position: fixed;
     bottom: 8.5%;
-    right: 0;
+    right: 12px;
     z-index: 100;
+    justify-content: center;
     display: none;
     text-decoration: none;
-    color: rgb(240, 232, 232);
-    background-color: rgba(240, 21, 14, 0);
-    padding: 10px 20px 10px 10px;
-    font-size: 12px;
+    border-radius: 100%;
+    background-color: #ee5c19;
+    padding: 10px 17px 10px 15px;
+    font-size: 20px;
 }
 
-.fa.fa-chevron-circle-up {
-    color: red;
+.fa.fa-arrow-up {
+    color: white;
 }
 
-.fa.fa-chevron-circle-up:hover {
-    color: #c54d4d;
+.fa.fa-arrow-up:hover {
+    color: whitesmoke;
 }
 
 .text-black {
     color: #000;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .text {
@@ -423,8 +427,8 @@ body>td {
     border-radius: 5px;
     margin-left: 30px;
     padding: 8px 13px;
-    border: 1px solid #f54d4d ;
-    background: rgba(255,87,34,.1);
+    border: 1px solid #f54d4d;
+    background: rgba(255, 87, 34, .1);
 }
 
 .button_to.buy {
@@ -476,56 +480,4 @@ body>td {
     text-decoration: none;
     color: #ee4d2d;
     border-color: #ee4d2d;
-}
-
-input[type="number"] {
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    appearance: textfield;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-}
-
-.number-input {
-    margin: 3rem;
-}
-
-.number-input button {
-    -webkit-appearance: none;
-    background-color: transparent;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin: 0;
-    position: relative;
-}
-
-.number-input input[type=number] {
-    text-align: center;
-}
-
-.md-number-input.number-input {
-    border: 2px solid #ddd;
-    width: 11.8rem;
-}
-
-.md-number-input.number-input button {
-    outline: none;
-    width: 3rem;
-    height: 2rem;
-    padding-top: .8rem;
-}
-
-
-.md-number-input.number-input input[type=number] {
-    max-width: 50px;
-    border: solid #ddd;
-    border-width: 0 2px;
-    font-size: 16px;
-    height: 22px;
-    outline: none;
 }

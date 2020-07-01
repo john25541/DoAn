@@ -19,8 +19,8 @@ ActiveAdmin.register Chitietsp do
     filter :hinhanhsp
     filter :soluongton
 
-  form do |f|
-    f.inputs do
+  form  do |f|
+    f.inputs "Nhap San Pham"  do
       f.input :machitietsp, label: 'Mã chi tiết sản phẩm'
       f.input :sanpham_id, label: 'sản phẩm', as: :select, :collection => Sanpham.all.map{|sanpham| [sanpham.tensanpham, sanpham.masanpham]}
       f.input :mausp, label: 'Màu'

@@ -24,9 +24,9 @@
         <%hash_image[details_of_product.mausp] = details_of_product.hinhanhsp%>
         <%end%>
         <%hash_image.each do |key, values|%>
-          <div class="pull-left circular">
-            <%= link_to ( image_tag values, class: "small_image_color"), sanpham_path(@product_details, color:key)%>
-          </div>
+        <div class="pull-left circular">
+          <%= link_to ( image_tag values, class: "small_image_color"), sanpham_path(@product_details, color:key)%>
+        </div>
         <%end%>
       </div>
     </div>
@@ -37,10 +37,16 @@
       <div class="col-12 col-sm-12">
         <p class="price">
           <%if product_follow_category.giakhuyenmai.nil? || product_follow_category.giakhuyenmai == 0 %>
-          <span> <%= number_to_currency(product_follow_category.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
+          <span>
+            <%= number_to_currency(product_follow_category.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup
+              style="font-style: unset;">đ</sup></span>
           <%else%>
-          <span style="text-decoration:line-through"><%= number_to_currency(product_follow_category.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
-          <span style="color:#ff0000"><%= number_to_currency(product_follow_category.giakuyenmai, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup style="font-style: unset;">đ</sup></span>
+          <span
+            style="text-decoration:line-through"><%= number_to_currency(product_follow_category.giaban, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup
+              style="font-style: unset;">đ</sup></span>
+          <span
+            style="color:#ff0000"><%= number_to_currency(product_follow_category.giakuyenmai, precision: 0, unit: "", delimiter: ".", format: "%n %u")%><sup
+              style="font-style: unset;">đ</sup></span>
           <%end%>
         </p>
       </div>
@@ -50,3 +56,7 @@
 <%end%>
 <%end%>
 <%end%>
+<!-- Pagination -->
+<div class="col-7 text-right">
+  <%=will_paginate @array_product_follow_category, class: "justify-content-end" , style: "color:orange"%>
+</div>
