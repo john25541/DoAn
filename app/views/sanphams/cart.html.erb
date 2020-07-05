@@ -19,11 +19,19 @@
           <tr>
             <td><%=image_tag product_detail.hinhanhsp, :style => "max-width:100px; max-height:130px;"%></td>
             <td><%=product_detail.sanpham.tensanpham%></td>
-            <td><%=product_detail.mausp%></td>
-            <td id = "arr_size"></td>
+            <td><%=product_detail.mausp%></td>  
+            <td ><%=product_detail.size%></td>
+            <td>
+              <div class  ="row">
+                <i onclick="decrementValue()" class="fa fa-minus">
+                <input id="number" value="1" min="1" max="200"></i>
+                <i onclick="incrementValue()" class="fa fa-plus"></i>
+              </div>
+            </td>
             <td></td>
-            <td></td>
-            <td><%=link_to "Xóa", remove_from_cart_path(product_detail), method: :delete%></td>
+            <td>
+              <%=link_to "Xóa", remove_from_cart_path(product_detail), method: :delete%>
+            </td>
         </tbody>
         <%end%>
       </table>

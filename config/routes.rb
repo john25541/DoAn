@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :khachhangs
+  get "khachhangs/profile"
+  put "khachhangs/update_info"
+  get "khachhangs/update_info"
+
 
   resources :dondathangs
 

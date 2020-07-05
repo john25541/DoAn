@@ -1,4 +1,5 @@
 class SanphamsController < ApplicationController
+  
   require 'will_paginate/array'
   before_action :set_product, only: %i[show]
   before_action :initialize_session
@@ -80,6 +81,7 @@ class SanphamsController < ApplicationController
   end
 
   def show
+    
     @product = Sanpham.includes(:chitietsps).find(params[:id])
     @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:color])
     @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
@@ -89,24 +91,29 @@ class SanphamsController < ApplicationController
     product_same_name.each do |product_detail|
       @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
-    # binding.pry
+    
   end
-
   def cart
-
   end
 
   def add_to_cart
   
-  code_product_detail = params[:machitietsp]
-  session[:cart] << code_product_detail unless session[:cart].include?(code_product_detail)
+    params[:product_size]
 
-  redirect_to cart_path
-
+    # binding.pry
+    params[:product_size].present? && params[:product_size].eql?('1')
+    @product_size = params[:product_size]
+    product_detail = Chitietsp.find_by(sanpham_id: params[:sanpham_id],mausp: params[:color],size: params[:product_size])
+    code_product_detail = product_detail.machitietsp
+    
+    session[:cart] << code_product_detail unless session[:cart].include?(code_product_detail)
+    redirect_to cart_path
   end
   
   def remove_from_cart
-    code_product_detail = params[:machitietsp]
+    product_detail = Chitietsp.find_by(sanpham_id: params[:sanpham_id],mausp: params[:color],size: params[:product_size])
+    code_product_detail = product_detail.machitietsp
+
     session[:cart].delete(code_product_detail)
     redirect_to cart_path
   end

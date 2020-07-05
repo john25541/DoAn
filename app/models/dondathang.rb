@@ -3,4 +3,5 @@ class Dondathang < ApplicationRecord
 
   has_many :chitietdathangs, dependent: :delete_all
   has_and_belongs_to_many :chitietsps
+  belongs_to :khachhang
 end

@@ -54,6 +54,9 @@ gem 'activeadmin'
 
 gem "font-awesome-rails"
 
+gem 'carrierwave'
+
+
 #===============================================================
 
 group :development, :test do

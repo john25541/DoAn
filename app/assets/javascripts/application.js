@@ -31,17 +31,16 @@ function decrementValue() {
     document.getElementById('number').value = value;
 }
 
-function selectProductSize() {
-    $('.ads_Checkbox:checked').each(function() {
-        var index;
-        var arr = "";
-        var size = [];
-        arr += $(this).val();
-        size = arr.split(",");
-        for (index = 0; index < size.length; ++index) {
-            $('#arr_size').val(size[index]);
-      }
-    });
+$(function(){
+    $('#formSize input').on('change', function() {
+        var $productSize = ($('input[name="product_size"]:checked', '#formSize').val()); 
+        $("input[id='size']").val($productSize);
+     });
+});
+
+function selectQuantity() {
+    var productNumber =  $("#number" ).val();
+    $("#number" ).val();
 }
 
 $(function() {
