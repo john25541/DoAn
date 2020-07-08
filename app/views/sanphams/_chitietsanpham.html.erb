@@ -24,11 +24,17 @@
             <span class="text-black">Size:</span>
           </div>
           <%=form_tag  add_to_cart_path(sanpham_id: @product.masanpham , color: @product_detail.mausp),{ controller: :sanphams, action: :add_to_cart} do%>
-            <%@product_details_all.each do |product_detail|%>
-              <%=radio_button_tag :product_size, product_detail.size%> <%=product_detail.size%>
-            <%end%>
-            <%=submit_tag "Thêm Vào Giỏ Hàng", remote: true %>
-            <%=submit_tag "mua ngay"%>
+            <div class="flex items-center top">
+              <div class="row">
+                <%@product_details_all.each do |product_detail|%>
+                  <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
+                <%end%>
+              </div>
+            </div>
+            <div class="flex items-center topv"> 
+              <%=submit_tag "Thêm Vào Giỏ Hàng", class: "button_to buy", remote: true %>
+              <%=submit_tag "Mua ngay", class: "button_to now", remote: true %>
+            </div>
           <%end%>
         </div>
       </div>
