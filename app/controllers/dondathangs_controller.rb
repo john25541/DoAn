@@ -7,13 +7,11 @@ class DondathangsController < ApplicationController
     @dondathangs = Dondathang.all
   end
 
-  # GET /dondathangs/1
-  # GET /dondathangs/1.json
   def show
   end
 
   # GET /dondathangs/new
-  def new
+  def new 
     @dondathang = Dondathang.new
   end
 
@@ -24,6 +22,7 @@ class DondathangsController < ApplicationController
   # POST /dondathangs
   # POST /dondathangs.json
   def create
+    
     @dondathang = Dondathang.new(dondathang_params)
 
     respond_to do |format|

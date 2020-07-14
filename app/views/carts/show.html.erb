@@ -1,0 +1,75 @@
+<div class = "container-fluid col-md-8" style= "min-height: 580px;">
+  <br>
+  <div class = "row">
+    <div class = "col-md-8 col-sm-8">
+      <table class= "table table-responsive">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Màu</th>
+            <th scope="col">Size</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Thành tiền</th>
+            <th scope="col">Xóa</th>
+          </tr>
+        </thead>
+        <%@order_items.each do |item| %>
+          <tbody>
+            <tr>
+              <td><%=image_tag item.chitietsp.hinhanhsp, :style => "max-width:100px; max-height:130px;"%></td>
+              <td><%=item.chitietsp.sanpham.tensanpham%></td>
+              <td><%=item.chitietsp.mausp%></td>
+              <td><%=item.chitietsp.size%></td>
+              <td><%=item.soluong%></td>
+              <td><%=item.thanhtien%></td>
+              <td>
+                <%=link_to chitietdathang_path(item), :method => :delete,data: { confirm: 'Xoá sản phẩm ' +item.chitietsp.sanpham.tensanpham + item.chitietsp.size + ' ?' }, remote: :true do %>
+                  <section>
+                    <span class="trash">
+                      <span></span>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </span>
+                  </section>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        <%end%>
+      </table>
+    </div>
+    <div class = "col-md-4 col-sm-4">
+      <div class ="col-md-12">
+        <h5 class = "text-center">TỔNG TIỀN GIỎ HÀNG </h5>
+        <table>
+          <tbody>
+            <tr>
+              <td class = "col-sm-8">Tổng sản phẩm</td>
+              <td class = "col-sm-4"><%=@order_items.collect{|order_item| order_item.soluong}.sum%></td>
+            </tr>
+            <tr>
+              <td class = "col-sm-8">Thành Tiền</td>
+              <td class = "col-sm-4"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class = "col-sm-8">Tạm tình</td>
+              <td class = "col-sm-4 font-weight-bold"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+            </tr>
+          </tfoot>
+        </table>
+        <br>
+        <p class="text-center">Bạn sẽ được miễn phí ship khi đơn hàng của bạn có tổng giá trị trên 3.000.000<sup>đ</sup></p>
+        <div class = "row container">
+          <div>
+            <%= button_to  "TIẾP TỤC MUA SẮM" , root_path , method: :get%>
+          </div>
+          <div>
+            <%= button_to  "THANH TOÁN", new_dondathang_path , method: :get%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

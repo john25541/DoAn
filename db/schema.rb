@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20200630120359) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "chitietdathangs", primary_key: ["chitietsp_id", "dondathang_id"], force: :cascade do |t|
-    t.string "chitietsp_id", null: false
-    t.string "dondathang_id", null: false
+  create_table "chitietdathangs", force: :cascade do |t|
+    t.string "chitietsp_id"
+    t.string "dondathang_id"
     t.integer "soluong"
     t.decimal "thanhtien"
     t.index ["chitietsp_id", "dondathang_id"], name: "index_chitietdathangs_on_chitietsp_id_and_dondathang_id", unique: true
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20200630120359) do
     t.date "ngaydathang"
     t.date "ngaygiaohang"
     t.string "tinhtrang"
-    t.decimal "tongtien"
   end
 
   create_table "hoadonnhaps", id: false, force: :cascade do |t|

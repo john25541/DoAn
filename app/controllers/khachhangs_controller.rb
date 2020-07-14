@@ -1,4 +1,5 @@
 class KhachhangsController < ApplicationController
+  
   def update_info
     current_khachhang.assign_attributes user_params
     flash[:info] =

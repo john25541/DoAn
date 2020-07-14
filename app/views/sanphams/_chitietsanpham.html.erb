@@ -23,12 +23,14 @@
           <div class="flex items-center">
             <span class="text-black">Size:</span>
           </div>
-          <%=form_tag  add_to_cart_path(sanpham_id: @product.masanpham , color: @product_detail.mausp),{ controller: :sanphams, action: :add_to_cart} do%>
+          <%=form_for @order_item, as: :product_detail do |f|%>
+            <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
+            <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
             <%@product_details_all.each do |product_detail|%>
               <%=radio_button_tag :product_size, product_detail.size%> <%=product_detail.size%>
             <%end%>
-            <%=submit_tag "Thêm Vào Giỏ Hàng", remote: true %>
-            <%=submit_tag "mua ngay"%>
+            <%= f.number_field :soluong, value: 1 , :min =>  1%>
+            <%= f.submit "Add to Card ", remote: :true%>
           <%end%>
         </div>
       </div>

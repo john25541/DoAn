@@ -7,13 +7,16 @@ Rails.application.routes.draw do
   put "khachhangs/update_info"
   get "khachhangs/update_info"
 
+  resource :carts, only: [:show]
 
   resources :dondathangs
-
+  resources :chitietdathangs
+  
+  
   resources :sanphams
-  get 'cart', to: 'sanphams#cart', as: 'cart'
+
   post 'sanphams/add_to_cart', to:'sanphams#add_to_cart', as:  'add_to_cart'
-  delete 'sanphams/remove_from_cart', to: 'sanphams#remove_from_cart', as: 'remove_from_cart'
+  delete 'carts/remove_from_cart', to: 'carts#remove_from_cart', as: 'remove_from_cart'
 
   resources :loaisanphams
 
