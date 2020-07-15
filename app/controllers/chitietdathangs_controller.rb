@@ -1,5 +1,7 @@
 class ChitietdathangsController < ApplicationController
 
+  before_action :authenticate_khachhang!
+
   def new
     @order_item = Chitietdathang.new
   end
@@ -12,7 +14,9 @@ class ChitietdathangsController < ApplicationController
     params[:product_detail] = params[:product_detail].except(:sanpham_id, :mausp)
 
     @order = current_order
+    # binding.pry
     @order_item = @order.chitietdathangs.new(order_params)
+    
     respond_to do |format|
       if @order_item.save
         format.html { redirect_to carts_path }

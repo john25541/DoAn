@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200630120359) do
+ActiveRecord::Schema.define(version: 20200714122942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,10 +71,11 @@ ActiveRecord::Schema.define(version: 20200630120359) do
   end
 
   create_table "dondathangs", primary_key: "madondathang", id: :string, force: :cascade do |t|
-    t.text "ghichu"
     t.date "ngaydathang"
     t.date "ngaygiaohang"
-    t.string "tinhtrang"
+    t.string "tinhtrang", default: "1"
+    t.bigint "khachhang_id"
+    t.index ["khachhang_id"], name: "index_dondathangs_on_khachhang_id"
   end
 
   create_table "hoadonnhaps", id: false, force: :cascade do |t|
@@ -143,6 +144,7 @@ ActiveRecord::Schema.define(version: 20200630120359) do
   add_foreign_key "chitietdathangs", "chitietsps", primary_key: "machitietsp", name: "fk_chitietdathang_chitietsp"
   add_foreign_key "chitietdathangs", "dondathangs", primary_key: "madondathang", name: "fk_chitietdathang_dondathang"
   add_foreign_key "chitietsps", "sanphams", primary_key: "masanpham", name: "fk_chitietsp_sanpham"
+  add_foreign_key "dondathangs", "khachhangs"
   add_foreign_key "loaisanphams", "danhmucs", primary_key: "madanhmuc", name: "fk_loaisp_danhmuc"
   add_foreign_key "sanphams", "loaisanphams", primary_key: "maloai", name: "fk_sanpham_loaisp"
   add_foreign_key "sanphams", "thuonghieus", primary_key: "mathuonghieu", name: "fk_sanpham_thuonghieu"

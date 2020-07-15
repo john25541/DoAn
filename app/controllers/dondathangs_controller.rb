@@ -13,6 +13,7 @@ class DondathangsController < ApplicationController
   # GET /dondathangs/new
   def new 
     @dondathang = Dondathang.new
+    @order_items = Chitietdathang.joins(:chitietsp).find(session[:cart])
   end
 
   # GET /dondathangs/1/edit
@@ -22,16 +23,18 @@ class DondathangsController < ApplicationController
   # POST /dondathangs
   # POST /dondathangs.json
   def create
-    
-    @dondathang = Dondathang.new(dondathang_params)
-
+    cart = session[:cart]
+    @dondathang = current_khachhang.dondathangs.create(dondathang_params)
     respond_to do |format|
       if @dondathang.save
-        format.html { redirect_to @dondathang, notice: 'Dondathang was successfully created.' }
+        @order_items = Chitietdathang.joins(:chitietsp).find(session[:cart])
+        @order_items.each  do |item| 
+          item.dondathang_id = @dondathang.id
+          item.save
+        end
+        session[:cart].clear
+        format.html { render "dondathangs/success" }
         format.json { render :show, status: :created, location: @dondathang }
-      else
-        format.html { render :new }
-        format.json { render json: @dondathang.errors, status: :unprocessable_entity }
       end
     end
   end

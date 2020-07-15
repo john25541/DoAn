@@ -6,7 +6,7 @@ class KhachhangsController < ApplicationController
       if current_khachhang.save
         flash[:success] = "Thông tin tài khoản của bạn đã được cập nhật."
       end
-    redirect_to khachhangs_profile_path
+      redirect_back(fallback_location: root_path)
   end
   private
   def user_params
