@@ -20,6 +20,10 @@ class SanphamsController < ApplicationController
       showProType
     end
     showBrands if params[:brand].present?
+    # Sort prices
+    unless params[:sortPrice].nil?
+      @array_product_follow_category = @array_product_follow_category.order(giaban: params[:sortPrice])
+    end
   end
 
   def showProSale
@@ -76,13 +80,13 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)  
-    @array_product_follow_category.delete_if(&:blank?)  
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = params[:brand]
   end
 
   def show
-    
     @product = Sanpham.includes(:chitietsps).find(params[:id])
+    @product_category_sames = Sanpham.includes(:chitietsps).where(loaisanpham_id: @product.loaisanpham_id).limit(6)
     @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:color])
     @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
     product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)
@@ -91,16 +95,13 @@ class SanphamsController < ApplicationController
     product_same_name.each do |product_detail|
       @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
-    
   end
+
   def cart
   end
 
   def add_to_cart
-  
     params[:product_size]
-
-    # binding.pry
     params[:product_size].present? && params[:product_size].eql?('1')
     @product_size = params[:product_size]
     product_detail = Chitietsp.find_by(sanpham_id: params[:sanpham_id],mausp: params[:color],size: params[:product_size])

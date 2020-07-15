@@ -494,3 +494,9 @@ body>td {
     width: 3em;
 }
 
+.row.p{
+    input[type="radio"]{
+        position: inherit;
+        opacity: 1;
+    }
+}
