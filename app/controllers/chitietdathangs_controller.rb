@@ -1,7 +1,5 @@
 class ChitietdathangsController < ApplicationController
 
-  before_action :authenticate_khachhang!
-
   def new
     @order_item = Chitietdathang.new
   end

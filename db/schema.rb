@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20200714122942) do
   create_table "dondathangs", primary_key: "madondathang", id: :string, force: :cascade do |t|
     t.date "ngaydathang"
     t.date "ngaygiaohang"
-    t.string "tinhtrang", default: "1"
+    t.integer "tinhtrang", default: 1
     t.bigint "khachhang_id"
     t.index ["khachhang_id"], name: "index_dondathangs_on_khachhang_id"
   end

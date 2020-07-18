@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :dondathangs
   get "dondathangs/success"
+  get 'dondathangs/:madondathang/cancel', to: 'dondathangs#cancel_order', as: :cancel_order
+
   resources :chitietdathangs
   
   

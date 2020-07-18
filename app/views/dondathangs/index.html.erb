@@ -1,25 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Dondathangs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dondathangs.each do |dondathang| %>
-      <tr>
-        <td><%= link_to 'Show', dondathang %></td>
-        <td><%= link_to 'Edit', edit_dondathang_path(dondathang) %></td>
-        <td><%= link_to 'Destroy', dondathang, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Dondathang', new_dondathang_path %>
+<div class = "container" style= " min-height: 520px;">
+  <h4 class = "card-header">Đơn hàng của tôi</h4>
+  <div class = "table-responsive text-nowrap">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Mã đơn hàng</th>
+          <th scope="col">Ngày mua</th>
+          <th scope="col">Tổng tiền</th>
+          <th scope="col">Trạng thái đơn hàng</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <% unless @orders.nil? %>
+        <%@orders.each do |order|%>
+          <tbody>
+            <tr>
+              <td><%=order.madondathang%></td>
+              <td><%=order.ngaydathang.strftime("%d/%m/%Y")%></td>
+              <td><%order_item =  Chitietdathang.joins(:chitietsp).where(dondathang_id: order.madondathang)%>
+                <%=order_item.collect{ |item| item.soluong * item.chitietsp.sanpham.giaban}.sum%>
+              </td>
+              <td><%=order.tinhtrang%></td>
+              <td></td>
+              <td>
+                <%=button_to "Chi tiết đơn hàng", dondathang_path(order ), method: :get%>
+              </td>
+            </tr>
+          </tbody>
+        <%end%>
+      <%end%>
+    </table>
+  </div>
+</div>

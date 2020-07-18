@@ -4,7 +4,7 @@ class CreateDondathangs < ActiveRecord::Migration[5.1]
       t.string :madondathang 
       t.date :ngaydathang
       t.date :ngaygiaohang
-      t.string :tinhtrang , default: 1
+      t.integer :tinhtrang , default: 1
     end
     execute ("ALTER TABLE dondathangs ADD PRIMARY KEY (madondathang)")
   end
