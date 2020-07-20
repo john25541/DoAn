@@ -7,7 +7,6 @@ class ChitietdathangsController < ApplicationController
   def create
 
     @product_detail = Chitietsp.joins(:sanpham).find_by(sanpham_id: params[:product_detail]["sanpham_id"], mausp: params[:product_detail]["mausp"] ,size: params[:product_size])
-    
     params[:product_detail].merge!(chitietsp_id: @product_detail.machitietsp)
     params[:product_detail] = params[:product_detail].except(:sanpham_id, :mausp)
 

@@ -19,6 +19,10 @@ class SanphamsController < ApplicationController
       showProType
     end
     showBrands if params[:brand].present?
+    # Sort prices
+    unless params[:sortPrice].nil?
+      @array_product_follow_category = @array_product_follow_category.order(giaban: params[:sortPrice])
+    end
   end
 
   def showProSale
@@ -81,6 +85,7 @@ class SanphamsController < ApplicationController
 
   def show
     @product = Sanpham.includes(:chitietsps).find(params[:id])
+    @product_category_sames = Sanpham.includes(:chitietsps).where(loaisanpham_id: @product.loaisanpham_id).limit(6)
     @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:color])
     @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
     product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)

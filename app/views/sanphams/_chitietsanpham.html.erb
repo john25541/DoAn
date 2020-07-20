@@ -23,14 +23,23 @@
           <div class="flex items-center">
             <span class="text-black">Size:</span>
           </div>
-          <%=form_for @order_item, as: :product_detail do |f|%>
-            <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
-            <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
-            <%@product_details_all.each do |product_detail|%>
-              <%=radio_button_tag :product_size, product_detail.size%> <%=product_detail.size%>
-            <%end%>
-            <%= f.number_field :soluong, value: 1 , :min =>  1%>
-            <%= f.submit "Add to Card ", remote: :true%>
+          <%=form_for @order_item, as: :product_detail, remote: true  do |f|%>
+            <div class="flex items-center top">
+              <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
+              <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
+              <div class="row">
+                <%@product_details_all.each do |product_detail|%>
+                  <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
+                <%end%>
+              </div>
+              <div class="row">
+                <%=f.number_field :soluong, value: 1 , :min =>  1%>
+              </div>
+            </div>
+            <div class="flex items-center topv">
+              <%= f.submit "Thêm Vào Giỏ Hàng", class: "button_to buy" %>
+              <%= f.submit "Mua ngay", class: "button_to now" %>
+            </div>
           <%end%>
         </div>
       </div>

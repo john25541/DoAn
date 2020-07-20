@@ -1,6 +1,6 @@
 <head>
   <link rel="stylesheet" href="/assets/signin-up.scss" />
-<head>
+</head>
 <body class = "bg-img">
   <div class="container ">
     <div class="d-flex justify-content-center h-100">
@@ -9,13 +9,14 @@
           <h3>Đăng nhập</h3>
           <div class="d-flex justify-content-end social_icon">
             <span >
-
-                <i class="fab fa-facebook-square"></i>
-
+              <%=link_to  do%>
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+              <%end%>
             </span>
             <span>
-                <i class="fab fa-google-plus-square"></i>
-
+              <%=link_to  do%>
+                <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+              <%end%>
             </span>
           </div>
         </div>
@@ -26,7 +27,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <%= f.email_field :email, class: "form-control ", placeholder: "Tài khoản", autofocus: true, autocomplete: "email" %>
+                <%= f.email_field :email, class: "form-control ", placeholder: "Tài khoản", autofocus: true %>
               </div>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
@@ -37,10 +38,11 @@
               <div class="row align-items-center remember">
                 <%= f.check_box :remember_me%> Nhớ mật khẩu
               </div>
+              <br>
               <div class="form-group">
                 <% if flash.alert %>
-                  <div id="error_explanation" style="color:red;">
-                    Sai Tài Khoản Hoặc Mật Khẩu
+                  <div id="error_explanation" style="color:white;">
+                    Sai Tài Khoản Hoặc Mật Khẩu !
                   </div>
                 <% end %>
                 <%= f.submit "Đăng Nhập", class: "btn float-right login_btn" , style:"width:130px"%>
