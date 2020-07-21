@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200714122942) do
+ActiveRecord::Schema.define(version: 20200721174038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20200714122942) do
   end
 
   create_table "dondathangs", primary_key: "madondathang", id: :string, force: :cascade do |t|
+    t.string "diachigiaohang"
     t.date "ngaydathang"
     t.date "ngaygiaohang"
     t.integer "tinhtrang", default: 1

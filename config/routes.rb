@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
+  
   devise_for :khachhangs
   get "khachhangs/profile"
   put "khachhangs/update_info"

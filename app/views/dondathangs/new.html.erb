@@ -1,18 +1,25 @@
 <br>
 <div class = "container col-xl-10 align-self-center">
   <div class="row">
-    <div class="col-sm-12 col-md-8 ">
+    <div class="col-sm-12 col-md-4 ">
       <h4>Địa chỉ giao hàng</h4>
       <br>
       <div class="card bg-light border-info mb-3" style="max-width: 28rem;">
         <div class="card-body">
           <p class="card-text">Họ và tên: <%=current_khachhang.hotenkhachhang%></p>
-          <p class="card-text">Địa chỉ: <%=current_khachhang.diachi%></p>
+          <p class="card-text">Địa chỉ: 
+            <b id = "address" value = ""></b>
+          </p>
           <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
         </div>
         <div class="card-footer">
           <button id="btn_edit" class="btn btn-outline-dark">Sửa</button>
         </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 ">
+      <div id="user_profile">
+        <%=render "dondathangs/user_profile"%>
       </div>
     </div>
     <div class = "col-md-4 col-sm-4">
@@ -44,10 +51,6 @@
     </div>
   </div>
 </div>
-<div id="user_profile">
-  <%=render "dondathangs/user_profile"%>
-</div>
-
 <!--######################################################## --->
 <script>
   $(document).ready(function(){

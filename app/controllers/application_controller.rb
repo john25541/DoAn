@@ -9,6 +9,5 @@ class ApplicationController < ActionController::Base
   def load_header
     @category = Danhmuc.includes(:loaisanphams)
     @brand = Thuonghieu.includes(:sanphams)
-  end
-
+  end  
 end

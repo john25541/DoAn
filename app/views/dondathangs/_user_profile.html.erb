@@ -1,76 +1,33 @@
-<div id = "card_profile" class = "main-container container">
-  <div class="col-md-8 col-sm-6">
+<div id = "card_profile">
+  <div class="col-md-12 col-sm-12">
     <div class = "card">
       <div class = "card-header" >
         Thông tin
       </div>
       <div class = "card-body">
-      <%= form_for current_khachhang, url: khachhangs_update_info_path, html: { method: :put } do |f|%>
         <form >
-          <div class="form-group">
-            <%=f.label :"Họ và tên"%>
-            <%=f.text_field :hotenkhachhang  ,class:"form-control" ,placeholder:"Họ và tên"%>
-            <div class="invalid-feedback d-block">
-              <% if @dondathang.errors.any? %>
-                <% @dondathang.errors.full_messages.each do |message| %>
-                  <% if message == "Name can't be blank" %>
-                    Vui lòng nhập họ và tên.
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
+          <label for="full_name">Họ và tên</label>
+          <div class="form-group form-control" readonly = 'readonly'> 
+            <%=current_khachhang.hotenkhachhang%>
           </div>
-          <div class="form-group">
-            <%=f.label :Email%>
-            <%=f.email_field :email,class:"form-control ", readonly: 'readonly' , autocomplete: "email"%>
-            <div class="invalid-feedback d-block">
-              <% if @dondathang.errors.any? %>
-                <% @dondathang.errors.full_messages.each do |message| %>
-                  <% if message == "Email can't be blank" %>
-                    Vui lòng nhập email.
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
+          <label for="email">Email</label>
+          <div class="form-group form-control" readonly = 'readonly'>
+            <%=current_khachhang.email%>
           </div>
-          <div class="form-group">
-            <%=f.label :"Điện thoại liên lạc"%>
-            <%=f.phone_field :sodienthoai ,class:"form-control" ,placeholder:"Số điện thoại",type:"number"%>
-            <div class="invalid-feedback d-block">
-              <% if @dondathang.errors.any? %>
-                <% @dondathang.errors.full_messages.each do |message| %>
-                  <% if message == "Phone can't be blank" %>
-                    Vui lòng nhập số điện thoại.
-                  <% end %>
-                  <% if message == "Phone is not a number" %>
-                    Vui lòng nhập số .
-                  <% end %>
-                  <% if message == "Phone is too short (minimum is 10 characters)" %>
-                    Vui lòng nhập 10 chữ số  của điện thoại.
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
+          <label for="phone_number">Điện thoại liên lạc</label>
+          <div class="form-group form-control" >  
+            <%=current_khachhang.sodienthoai%>
           </div>
+          <%= form_for @dondathang do |f| %>
           <div class="form-group">
             <%=f.label :"Địa chỉ giao hàng"%>
-            <%=f.text_field :diachi ,class:"form-control",placeholder:"Địa chỉ nhận hàng"%>
-            <div class="invalid-feedback d-block">
-              <% if @dondathang.errors.any? %>
-                <% @dondathang.errors.full_messages.each do |message| %>
-                  <% if message == "Address can't be blank" %>
-                    Vui lòng nhập địa chỉ giao hàng.
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
+            <%=f.text_field :diachigiaohang, :value => current_khachhang.diachi , class: "form-control"%>
           </div>
-          <br>
-          <%=f.submit "Lưu lại", class:"js-btnPlaceOrder btn btn-info fw"%>
+            <%=f.submit%>
           <%end%>
           <br>
           <button id= "btn_cancel" class="btn btn-outline-dark">Hủy bỏ</button>
-        </form>
+        </form> 
         <hr>
       </div>
     </div>
