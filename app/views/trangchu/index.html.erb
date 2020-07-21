@@ -52,14 +52,30 @@
   </div>
   <div id="menu">
     <div class="title">
-      <%=link_to "Cart", cart_path%>
+      
       <br>
       Sản phẩm 
     </div>
   </div>
   <div class="container-fluid col-md-10">
-    <div class="row"  id="sort_paginate_ajax">
-      <%= render partial: "DS_Sanpham" %>
+    <!-- <div class="row mb-4">
+      <div class="col-md-6 col-sm-12 col-6">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12 filter_show">
+            <%# <div class="col-md-12"><span>Bộ lọc</span><span class="caret pull-right"></span></div> %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-12 text-right">
+        <div class="row p">
+          <div class="col-mb-2"><span style="font-weight:bold">Sắp xếp:</span></div>
+          <div class="col-md-5"><input data-sorttype="asc" type="radio" name="s_prices" value="Ascending"> Giá từ thấp đến cao</div>
+          <div class="col-md-5"><input data-sorttype="desc" type="radio" name="s_prices" value="Descrease"> Giá từ cao đến thấp</div>
+        </div>
+      </div>
+    </div> -->
+    <div class="sort_paginate_ajax">
+      <%= render "DS_Sanpham"%>
     </div>
   </div>
 </body>

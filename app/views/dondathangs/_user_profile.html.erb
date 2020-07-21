@@ -1,0 +1,35 @@
+<div id = "card_profile">
+  <div class="col-md-12 col-sm-12">
+    <div class = "card">
+      <div class = "card-header" >
+        Thông tin
+      </div>
+      <div class = "card-body">
+        <form >
+          <label for="full_name">Họ và tên</label>
+          <div class="form-group form-control" readonly = 'readonly'> 
+            <%=current_khachhang.hotenkhachhang%>
+          </div>
+          <label for="email">Email</label>
+          <div class="form-group form-control" readonly = 'readonly'>
+            <%=current_khachhang.email%>
+          </div>
+          <label for="phone_number">Điện thoại liên lạc</label>
+          <div class="form-group form-control" >  
+            <%=current_khachhang.sodienthoai%>
+          </div>
+          <%= form_for @dondathang do |f| %>
+          <div class="form-group">
+            <%=f.label :"Địa chỉ giao hàng"%>
+            <%=f.text_field :diachigiaohang, :value => current_khachhang.diachi , class: "form-control"%>
+          </div>
+            <%=f.submit%>
+          <%end%>
+          <br>
+          <button id= "btn_cancel" class="btn btn-outline-dark">Hủy bỏ</button>
+        </form> 
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

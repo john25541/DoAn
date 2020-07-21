@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import "font-awesome";
+
 html,
 .bg-img {
     background-image: url('background.jpg');
@@ -18,7 +20,7 @@ html,
     height: auto;
     margin-top: auto;
     margin-bottom: auto;
-    width: 450px;
+    width: 451px;
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
 

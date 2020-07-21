@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200611052225) do
+ActiveRecord::Schema.define(version: 20200721174038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20200611052225) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "chitietdathangs", primary_key: ["chitietsp_id", "dondathang_id"], force: :cascade do |t|
-    t.string "chitietsp_id", null: false
-    t.string "dondathang_id", null: false
+  create_table "chitietdathangs", force: :cascade do |t|
+    t.string "chitietsp_id"
+    t.string "dondathang_id"
     t.integer "soluong"
     t.decimal "thanhtien"
     t.index ["chitietsp_id", "dondathang_id"], name: "index_chitietdathangs_on_chitietsp_id_and_dondathang_id", unique: true
@@ -71,11 +71,12 @@ ActiveRecord::Schema.define(version: 20200611052225) do
   end
 
   create_table "dondathangs", primary_key: "madondathang", id: :string, force: :cascade do |t|
-    t.text "ghichu"
+    t.string "diachigiaohang"
     t.date "ngaydathang"
     t.date "ngaygiaohang"
-    t.string "tinhtrang"
-    t.decimal "tongtien"
+    t.integer "tinhtrang", default: 1
+    t.bigint "khachhang_id"
+    t.index ["khachhang_id"], name: "index_dondathangs_on_khachhang_id"
   end
 
   create_table "hoadonnhaps", id: false, force: :cascade do |t|
@@ -94,6 +95,12 @@ ActiveRecord::Schema.define(version: 20200611052225) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "anhdaidien"
+    t.string "hotenkhachhang"
+    t.boolean "gioitinh"
+    t.string "diachi"
+    t.string "sodienthoai"
+    t.date "ngaysinh"
     t.index ["email"], name: "index_khachhangs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_khachhangs_on_reset_password_token", unique: true
   end
@@ -138,6 +145,7 @@ ActiveRecord::Schema.define(version: 20200611052225) do
   add_foreign_key "chitietdathangs", "chitietsps", primary_key: "machitietsp", name: "fk_chitietdathang_chitietsp"
   add_foreign_key "chitietdathangs", "dondathangs", primary_key: "madondathang", name: "fk_chitietdathang_dondathang"
   add_foreign_key "chitietsps", "sanphams", primary_key: "masanpham", name: "fk_chitietsp_sanpham"
+  add_foreign_key "dondathangs", "khachhangs"
   add_foreign_key "loaisanphams", "danhmucs", primary_key: "madanhmuc", name: "fk_loaisp_danhmuc"
   add_foreign_key "sanphams", "loaisanphams", primary_key: "maloai", name: "fk_sanpham_loaisp"
   add_foreign_key "sanphams", "thuonghieus", primary_key: "mathuonghieu", name: "fk_sanpham_thuonghieu"

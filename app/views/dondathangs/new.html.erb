@@ -1,5 +1,65 @@
-<h1>New Dondathang</h1>
-
-<%= render 'form', dondathang: @dondathang %>
-
-<%= link_to 'Back', dondathangs_path %>
+<br>
+<div class = "container col-xl-10 align-self-center">
+  <div class="row">
+    <div class="col-sm-12 col-md-4 ">
+      <h4>Địa chỉ giao hàng</h4>
+      <br>
+      <div class="card bg-light border-info mb-3" style="max-width: 28rem;">
+        <div class="card-body">
+          <p class="card-text">Họ và tên: <%=current_khachhang.hotenkhachhang%></p>
+          <p class="card-text">Địa chỉ: 
+            <b id = "address" value = ""></b>
+          </p>
+          <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
+        </div>
+        <div class="card-footer">
+          <button id="btn_edit" class="btn btn-outline-dark">Sửa</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 ">
+      <div id="user_profile">
+        <%=render "dondathangs/user_profile"%>
+      </div>
+    </div>
+    <div class = "col-md-4 col-sm-4">
+      <div class ="col-md-12">
+        <h5 class = "text-center">Đơn hàng (<%=@order_items.collect{|order_item| order_item.soluong}.sum%> sản phẩm)</h5>
+        <br>
+        <table>
+          <tbody>
+            <%@order_items.each do |item|%>
+              <tr>
+                <td class = "col-sm-8"><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
+                <td class = "col-sm-4"><%=item.thanhtien%></td>
+              </tr>
+            <%end%>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class = "col-sm-8">Tổng tiền</td>
+              <td class = "col-sm-4 font-weight-bold"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+            </tr>
+          </tfoot>
+        </table>
+        <br>
+        <p class="text-center">Bạn sẽ được miễn phí ship khi đơn hàng của bạn có tổng giá trị trên 3.000.000<sup>đ</sup></p>
+        <%=form_for @dondathang do |f|%>
+          <%f.submit "ĐẶT MUA" , class: "btn btn-primary btn-lg btn-block"%>
+        <%end%>
+      </div>  
+    </div>
+  </div>
+</div>
+<!--######################################################## --->
+<script>
+  $(document).ready(function(){
+      $("#user_profile").hide();
+      $("#btn_edit").click(function(){
+          $("#user_profile").show("slow");
+      })
+      $("#btn_cancel").click(function(){
+          $("#user_profile").hide("slow");
+      })
+  })
+</script>

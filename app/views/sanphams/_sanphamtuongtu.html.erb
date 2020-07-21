@@ -1,0 +1,14 @@
+<div class="breadcrumb">
+  <h5>SẢN PHẨM TƯƠNG TỰ</h5>
+</div>
+<div class="row">
+  <%@product_category_sames.each do |el,index|%>
+      <% if index == 12 %>
+        <%break%>
+      <%end%>
+      <div class="col-xs-12 col-md-2">
+        <%=link_to(image_tag(el.chitietsps.first.hinhanhsp ,style: "width:100px; height:130px;"), el) %>
+        <p><%= link_to el.tensanpham, el, class: "fw-normal" %></p>
+      </div>
+  <%end%>
+</div>

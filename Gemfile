@@ -28,7 +28,6 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-gem 'will_paginate', '~> 3.3'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -38,7 +37,11 @@ gem 'will_paginate', '~> 3.3'
 # gem 'capistrano-rails', group: :development
 #============================ASSETS GEM==================================
 
+
+
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+
+gem 'activeadmin'
 
 gem 'bootstrap', '~> 4.0.0'
 
@@ -50,9 +53,11 @@ gem 'devise'
 
 gem 'cancancan'
 
-gem 'activeadmin'
-
 gem "font-awesome-rails"
+
+gem 'carrierwave'
+
+gem 'will_paginate', '~> 3.3'
 
 #===============================================================
 

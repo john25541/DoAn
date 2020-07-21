@@ -1,3 +1,0 @@
-class ChitietdathangController < ApplicationController
-    
-end

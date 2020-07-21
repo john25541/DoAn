@@ -20,34 +20,27 @@
             <span class="text-black">Màu sắc:</span>
             <span class="product-color-text"><%= @product_detail.mausp %></span><label class="required"><em>&nbsp;*</em></label>
           </div>
-          <div class="flex items-center">   
+          <div class="flex items-center">
             <span class="text-black">Size:</span>
           </div>
-          <div class="flex items-center top">
-            <div class="row">
-              <%@product_details_all.each do |product_detail|%>
-                <%= check_box_tag "arr_size[]", product_detail.size -%><%= product_detail.size -%>
-              <%end%>
+          <%=form_for @order_item, as: :product_detail  do |f|%>
+            <div class="flex items-center top">
+              <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
+              <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
+              <div class="row">
+                <%@product_details_all.each do |product_detail|%>
+                  <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
+                <%end%>
+              </div>
+              <div class="row">
+                <%=f.number_field :soluong, value: 1 , :min =>  1%>
+              </div>
             </div>
-          </div>
-          </div>
-          <div class="flex items-center">
-            <div class = "row">
-              <span class="text-black">Số lượng:</span>
-              <span style="margin-right: 15px;">
-                <i  onclick="decrementValue()" class="fa fa-minus" aria-hidden="true"></i> 
-                <input id="number" type="number" value="1">
-                <i onclick="incrementValue()" class="fa fa-plus" aria-hidden="true"></i>
-              </span >
+            <div class="flex items-center topv">
+              <%= f.submit "Thêm Vào Giỏ Hàng", class: "button_to buy", remote: true%>
+              <%= f.submit "Mua ngay",class: "button_to now"%>
             </div>
-          </div>
-          <div class="flex items-center topv"> 
-            <%= button_to add_to_cart_path(masanpham: @product.masanpham , color: @product_detail.mausp) , onclick: "selectProductSize()" , class: "button_to buy" do%>
-              <i class="fa fa-shopping-basket bg" aria-hidden="true">Thêm Vào Giỏ Hàng</i>
-            <%end%>
-            <%= link_to add_to_cart_path(sanpham_id: @product.masanpham , color: @product_detail.mausp, ) , onclick: "selectProductSize()"  do%>  Mua Ngay
-            <%end%>
-          </div>
+          <%end%>
         </div>
       </div>
     </div>

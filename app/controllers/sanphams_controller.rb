@@ -1,15 +1,15 @@
 class SanphamsController < ApplicationController
-  require 'will_paginate/array'
   before_action :set_product, only: %i[show]
   before_action :initialize_session
-  before_action :load_cart
-  before_action :authenticate_khachhang! , only: :add_to_cart
+  before_action :authenticate_khachhang!, only: :add_to_cart
+
+  require "will_paginate/array"
   # GET /products
   # GET /products.json
   def index
     @products = Sanpham.all
     # Show product by conditions
-    if params[:pro] == 'Sale'
+    if params[:pro] == "Sale"
       showProSale
     elsif params[:sex].nil?
       showProducts
@@ -19,6 +19,10 @@ class SanphamsController < ApplicationController
       showProType
     end
     showBrands if params[:brand].present?
+    # Sort prices
+    unless params[:sortPrice].nil?
+      @array_product_follow_category = @array_product_follow_category.order(giaban: params[:sortPrice])
+    end
   end
 
   def showProSale
@@ -40,7 +44,7 @@ class SanphamsController < ApplicationController
     end
     @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
-    @bread = 'Sản phẩm'
+    @bread = "Sản phẩm"
   end
 
   def showProGender
@@ -61,8 +65,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)  
-    @array_product_follow_category.delete_if(&:blank?)  
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = params[:name]
     @gen = params[:sex]
   end
@@ -74,13 +78,14 @@ class SanphamsController < ApplicationController
       pro_cate = br.sanphams
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)  
-    @array_product_follow_category.delete_if(&:blank?)  
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category.delete_if(&:blank?)
     @bread = params[:brand]
   end
 
   def show
     @product = Sanpham.includes(:chitietsps).find(params[:id])
+    @product_category_sames = Sanpham.includes(:chitietsps).where(loaisanpham_id: @product.loaisanpham_id).limit(6)
     @product_detail = Chitietsp.find_by(sanpham_id: @product.masanpham, mausp: params[:color])
     @product_details_all = Chitietsp.where(sanpham_id: @product.masanpham, mausp: params[:color])
     product_same_name = Chitietsp.where(sanpham_id: @product.masanpham)
@@ -89,36 +94,15 @@ class SanphamsController < ApplicationController
     product_same_name.each do |product_detail|
       @image_product_same[product_detail.mausp] = product_detail.hinhanhsp
     end
-    # binding.pry
-  end
-
-  def cart
-
-  end
-
-  def add_to_cart
-  
-  code_product_detail = params[:machitietsp]
-  session[:cart] << code_product_detail unless session[:cart].include?(code_product_detail)
-
-  redirect_to cart_path
-
+    
+    #new line item
+    @order_item = current_order.chitietdathangs.new
   end
   
-  def remove_from_cart
-    code_product_detail = params[:machitietsp]
-    session[:cart].delete(code_product_detail)
-    redirect_to cart_path
-  end
-
   private
   def initialize_session
-   session[:cart] ||= [] 
-  end
-
-  def load_cart
-    @cart = Chitietsp.includes(:sanpham).find(session[:cart])
-  end
+    session[:cart] ||= [] 
+   end
 
   def set_product
     @product = Sanpham.find(params[:id])

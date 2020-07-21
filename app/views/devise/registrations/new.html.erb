@@ -1,42 +1,75 @@
 <head>
   <link rel="stylesheet" href="/assets/signin-up.scss" />
-<head>
+</head>
 <body class = "bg-img">
-	<div class="container ">
-		<div class="d-flex justify-content-center h-100">
-			<div class="card">
-				<div class="card-header">
-					<h3>Đăng Ký</h3>
-					<div class="d-flex justify-content-end social_icon">
-						<span>
-                <i class="fab fa-facebook-square"></i>
-</span>
-						<span>
-                <i class="fab fa-google-plus-square"></i>
- </span>
-					</div>
-				</div>
-				<div class="card-body">
+  <div class="container ">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Đăng Ký</h3>
+          <div class="d-flex justify-content-end social_icon">
+            <span >
+              <%=link_to  do%>
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+              <%end%>
+            </span>
+            <span>
+              <%=link_to  do%>
+                <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+              <%end%>
+            </span>
+          </div>
+        </div>
+        <div class="card-body">
           <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-type-material' } do |f|%>
-					  <form> 
+            <form>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-envelope"></i></span>
                 </div >
                 <%=f.email_field :email,class:"form-control", style: "width: 359px;", placeholder: "Email", autofocus: true, autocomplete: "email"%>
               </div>
+              <% if resource.errors.any? %>
+                <% resource.errors.full_messages.each do |message| %>
+                  <%if message ==  "Email can't be blank"%>
+                    <div id="error_explanation" style="color:white;">
+                      Tên tài khoản không hợp lệ !
+                    </div>
+                  <%end%>
+                <% end %>
+              <%end%>
+              <br>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <%=f.password_field :password,class:"form-control", style: "width: 359px;", placeholder: "Mật khẩu", autocomplete: "new-password"%>
               </div>
+              <% if resource.errors.any? %>
+                <% resource.errors.full_messages.each do |message| %>
+                  <%if message ==  "Password can't be blank"%>
+                    <div id="error_explanation" style="color:white;">
+                      Mật khẩu không thể bỏ trống !
+                    </div>
+                  <%end%>
+                <% end %>
+              <%end%>
+              <br>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <%=f.password_field :password_confirmation, class:"form-control",style: "width: 359px;", placeholder: "Nhập lại mật khẩu", autocomplete: "new-password"%>
               </div>
+              <% if resource.errors.any? %>
+                <% resource.errors.full_messages.each do |message| %>
+                  <%if message ==  "Password confirmation doesn't match Password"%>
+                    <div id="error_explanation" style="color:white;">
+                      Xác nhận không khớp với Mật khẩu !
+                    </div>
+                  <%end%>
+                <% end %>
+              <%end%>
               <!--
               <div class="row align-items-center remember">
                 <%= f.check_box :remember_me%>Tôi đồng ý &nbsp<%=link_to "Điều khoản dịch vụ" %>
@@ -45,15 +78,15 @@
               <div class="form-group">
                 <%=f.submit "Đăng ký", class: "btn float-right login_btn",style:"width:130px"%>
               </div>
-					  </form>
+            </form>
           <%end%>
-				</div>
-				<div class="card-footer">
-					<div class="d-flex justify-content-center links">
-						Bạn đã có tài khoản?<%=link_to "Đăng nhập", new_khachhang_session_path%>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Bạn đã có tài khoản?<%=link_to "Đăng nhập", new_khachhang_session_path%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>

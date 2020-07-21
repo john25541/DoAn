@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_dondathang_path(@dondathang) %> |
-<%= link_to 'Back', dondathangs_path %>
+<div class="container" >
+  <%=render"dondathangs/form"%>
+  <div class ="btn btn-warning">
+    <i class="fa fa-chevron-left" style ="color: #000; "></i>
+    <%=link_to "Back", dondathangs_path , style:"color: #000; "%>
+  </div>
+</div>

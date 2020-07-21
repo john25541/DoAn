@@ -1,0 +1,20 @@
+<br>
+<div class="container">
+  <div class= "card">
+    <div class = "card-header center">
+      <div>
+        <%=image_tag "order_s.png", class:"rounded mx-auto d-block", style: " wieght: 150px; height: 150px;"%>
+      </div>
+      <br>
+      <h4 class = "d-flex justify-content-center text-success">Cảm ơn quý khách đã mua hàng</h4>
+    </div>
+    <div class = "card-body">
+      <p class = "d-flex justify-content-center">Đơn hàng của quý khách đã được tiếp nhận</p>
+      <p class = "d-flex justify-content-center">Chi tiết đơn hàng của quý khách đã được gửi về địa chỉ Email: <%=current_khachhang.email%></p>
+      <p class = "d-flex justify-content-center">Mọi thắc mắc xin liên hệ Hotline: 0357502346</p>
+    </div>
+    <div class = "card-footer">
+      <%=link_to "Tiếp tục mua sắm", root_path%>
+    </div>
+  </div>
+</div>

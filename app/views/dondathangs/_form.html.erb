@@ -1,31 +1,41 @@
-<div class="table-title">
-        <div class="row justify-content-md-center">
-          <div class="col-xs-12 col-md-1">
-            <div class="padding-STT"> STT</div>
-          </div>
-          <div class="col-xs-12 col-md-3">
-            Sản Phẩm
-          </div>
-          <div class="col-xs-12 col-md-1">
-            Size
-          </div>
-          <div class="col-xs-12 col-md-2">
-            Đơn Giá
-          </div>
-          <div class="col-xs-12 col-md-1">
-            Số lượng
-          </div>
-          <div class="col-xs-12 col-md-1">
-            Số tiền
-          </div>
-          <div class="col-xs-12 col-md-1">
-            Thao tác
-          </div>
-        </div>
+<br>
+<article class="card">
+  <header class="card-header" style="font-size: 25px">
+   Chi tiết đơn hàng #<%=@order.madondathang%> - <b><%=@order.tinhtrang%></b>
+  </header>
+  <div class="card-body">
+    <article class="card">
+      <div class="card-body row">
+        <div class="col"> <strong>Thời gian đặt hàng:</strong> <br><%=@order.ngaydathang.strftime("%d-%m-%Y")%></div>
+        <div class="col"> <strong>Người đặt hàng:</strong> <br> <%=current_khachhang.hotenkhachhang%> , <i class="fa fa-phone"></i> <%=current_khachhang.sodienthoai%></div>
+        <div class="col"> <strong>Địa chỉ giao hàng:</strong> <br> <%=current_khachhang.diachi%></div>
       </div>
-      <div class="total_line">
-        <tr>
-          <td colspan="2">Tổng chi phí:</td>
-          <td><%%></td>
-        </tr>
+    </article>
+    <hr>
+      <div class="card-body row">
+        <div class="col"> <strong>Sản Phẩm:</strong> </div>
+        <div class="col"> <strong>Size:</strong>  </div>
+        <div class="col"> <strong>Màu:</strong>  </div>
+        <div class="col"> <strong>Giá:</strong> </div>
+        <div class="col"> <strong>Số Lượng:</strong> </div>
+         <div class="col"> <strong>Thành Tiền:</strong> </div>
       </div>
+      <% @order_items.each do |item| %>
+      <div class="card-body row">
+        <div class="col"> <%= item.chitietsp.sanpham.tensanpham %> </div>
+        <div class="col"> <%= item.chitietsp.size %> </div>
+        <div class="col"> <%= item.chitietsp.mausp %>  </div>
+        <div class="col"> <%= item.chitietsp.sanpham.giaban %>  </div>
+        <div class="col"> <%= item.soluong %>  </div>
+        <div class="col"> <%= item.soluong * item.chitietsp.sanpham.giaban %>  </div>
+      </div>
+      <% end %>
+    <hr>
+    <h5 class = "col-md-10 text-right">Tổng Tiền: <%=@order_items.collect{|item| item.soluong * item.chitietsp.sanpham.giaban}.sum%></h5>
+  </div>
+  <div class="card-footer">
+    <%if @order.tinhtrang == "Đơn hàng đang chờ xử lý"%>
+      <%=link_to "Hủy", cancel_order_path(@order.madondathang), class: "btn btn-danger" %>
+    <%end%>
+  </div>
+</article>
