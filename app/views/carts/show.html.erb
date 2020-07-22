@@ -22,7 +22,7 @@
               <td><%=item.chitietsp.mausp%></td>
               <td><%=item.chitietsp.size%></td>
               <td><%=item.soluong%></td>
-              <td><%=item.thanhtien%></td>
+              <td><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
               <td>
                 <%=link_to chitietdathang_path(item), :method => :delete,data: { confirm: 'Xoá sản phẩm ' +item.chitietsp.sanpham.tensanpham + item.chitietsp.size + ' ?' }, remote: :true do %>
                   <section>
@@ -45,17 +45,17 @@
           <tbody>
             <tr>
               <td class = "col-sm-8">Tổng sản phẩm</td>
-              <td class = "col-sm-4"><%=@order_items.collect{|order_item| order_item.soluong}.sum%></td>
+              <td class = "col-sm-4"><%= @order_items.collect{|order_item| order_item.soluong}.sum%></td>
             </tr>
             <tr>
               <td class = "col-sm-8">Thành Tiền</td>
-              <td class = "col-sm-4"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+              <td class = "col-sm-4"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <td class = "col-sm-8">Tạm tình</td>
-              <td class = "col-sm-4 font-weight-bold"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+              <td class = "col-sm-4 font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
             </tr>
           </tfoot>
         </table>

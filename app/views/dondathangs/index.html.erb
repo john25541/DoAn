@@ -19,7 +19,7 @@
               <td><%=order.madondathang%></td>
               <td><%=order.ngaydathang.strftime("%d/%m/%Y")%></td>
               <td><%order_item =  Chitietdathang.joins(:chitietsp).where(dondathang_id: order.madondathang)%>
-                <%=order_item.collect{ |item| item.soluong * item.chitietsp.sanpham.giaban}.sum%>
+                <%= number_to_currency(order_item.collect{ |item| item.soluong * item.chitietsp.sanpham.giaban}.sum, precision: 0, unit: "", delimiter: ".", format: "%n %u")%>
               </td>
               <td><%=order.tinhtrang%></td>
               <td></td>

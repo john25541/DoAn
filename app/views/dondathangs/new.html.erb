@@ -7,9 +7,7 @@
       <div class="card bg-light border-info mb-3" style="max-width: 28rem;">
         <div class="card-body">
           <p class="card-text">Họ và tên: <%=current_khachhang.hotenkhachhang%></p>
-          <p class="card-text">Địa chỉ: 
-            <b id = "address" value = ""></b>
-          </p>
+          <p class="card-text" id="address"></p>
           <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
         </div>
         <div class="card-footer">
@@ -31,14 +29,14 @@
             <%@order_items.each do |item|%>
               <tr>
                 <td class = "col-sm-8"><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
-                <td class = "col-sm-4"><%=item.thanhtien%></td>
+                <td class = "col-sm-4"><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
               </tr>
             <%end%>
           </tbody>
           <tfoot>
             <tr>
               <td class = "col-sm-8">Tổng tiền</td>
-              <td class = "col-sm-4 font-weight-bold"><%=@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum%><sup>đ</sup></td>
+              <td class = "col-sm-4 font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
             </tr>
           </tfoot>
         </table>
