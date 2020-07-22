@@ -54,6 +54,6 @@ $(document).on('turbolinks:load', function () {
 });
 
 $(document).ready(function () {
-    var value = $("#order_address").val();
-    $("#address").text(value);
+    var value = $("#dondathang_diachigiaohang").val();
+    $("#address").text("Địa chỉ: " + value);
 })
