@@ -32,7 +32,7 @@ ActiveAdmin.register Sanpham do
         ct.input :soluongton, label: "Số lượng tồn"
       end
     end
-    f.actions
+    actions
   end
 
   controller do
