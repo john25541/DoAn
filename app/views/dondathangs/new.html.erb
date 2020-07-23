@@ -1,23 +1,19 @@
 <br>
 <div class = "container col-xl-10 align-self-center">
+  <%=form_for @dondathang do |f|%>
   <div class="row">
-    <div class="col-sm-12 col-md-4 ">
+    <div class="col-sm-8 col-md-4 ">
       <h4>Địa chỉ giao hàng</h4>
       <br>
       <div class="card bg-light border-info mb-3" style="max-width: 28rem;">
         <div class="card-body">
           <p class="card-text">Họ và tên: <%=current_khachhang.hotenkhachhang%></p>
-          <p class="card-text" id="address"></p>
+          <p class="card-text">
+            <%=f.label :"Địa chỉ giao hàng: "%>
+            <%=f.text_field :diachigiaohang, :value => current_khachhang.diachi %>
+          </p>
           <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
         </div>
-        <div class="card-footer">
-          <button id="btn_edit" class="btn btn-outline-dark">Sửa</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-4 ">
-      <div id="user_profile">
-        <%=render "dondathangs/user_profile"%>
       </div>
     </div>
     <div class = "col-md-4 col-sm-4">
@@ -42,22 +38,11 @@
         </table>
         <br>
         <p class="text-center">Bạn sẽ được miễn phí ship khi đơn hàng của bạn có tổng giá trị trên 3.000.000<sup>đ</sup></p>
-        <%=form_for @dondathang do |f|%>
-          <%f.submit "ĐẶT MUA" , class: "btn btn-primary btn-lg btn-block"%>
-        <%end%>
+          <%=f.submit "ĐẶT MUA" , class: "btn btn-primary btn-lg btn-block"%>
       </div>  
     </div>
   </div>
+  <%end%>
 </div>
 <!--######################################################## --->
-<script>
-  $(document).ready(function(){
-      $("#user_profile").hide();
-      $("#btn_edit").click(function(){
-          $("#user_profile").show("slow");
-      })
-      $("#btn_cancel").click(function(){
-          $("#user_profile").hide("slow");
-      })
-  })
-</script>
+

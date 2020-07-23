@@ -37,11 +37,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 #============================ASSETS GEM==================================
 
-
-
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 gem 'activeadmin'
+gem 'active_admin_flat_skin'
 
 gem 'bootstrap', '~> 4.0.0'
 

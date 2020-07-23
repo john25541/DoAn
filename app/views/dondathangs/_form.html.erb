@@ -8,7 +8,7 @@
       <div class="card-body row">
         <div class="col"> <strong>Thời gian đặt hàng:</strong> <br><%=@order.ngaydathang.strftime("%d-%m-%Y")%></div>
         <div class="col"> <strong>Người đặt hàng:</strong> <br> <%=current_khachhang.hotenkhachhang%> , <i class="fa fa-phone"></i> <%=current_khachhang.sodienthoai%></div>
-        <div class="col"> <strong>Địa chỉ giao hàng:</strong> <br> <%=current_khachhang.diachi%></div>
+        <div class="col"> <strong>Địa chỉ giao hàng:</strong> <br> <%=@order.diachigiaohang%></div>
       </div>
     </article>
     <hr>

@@ -24,29 +24,7 @@ ActiveAdmin.register Sanpham do
       input :giakhuyenmai, label: "Giá Khuyến mãi"
       input :mota , label: "Mô tả"
     end
-    if f.object.new_record?
-      f.has_many :chitietsps do |ct|
-        ct.input :machitietsp, label: "Mã chi tiết sp"
-        ct.input :size, label: "Size"
-        ct.input :mausp, label: "Màu"
-        ct.input :soluongton, label: "Số lượng tồn"
-      end
-    end
     actions
   end
 
-  controller do
-    def create
-      chitiet = Chitietsps.create!(chitiet_params)
-  
-      params[:chitietsps][:sanphams_attributes].each do |_, u|
-        Sanpham.create!(loaisanpham_id: u[:loaisanpham_id], thuongwhieu_id: u[:thuonghieu_id], tensanpham: u[:tensanpham], giaban: u[:giaban], giakhuyenmai: u[:giakhuyenmai], mota: u[:mota]) do |sp|
-          sp.chitietsps = chitiet
-        end
-      end
-  
-      flash[:notice] = 'Thêm Sản Phẩm Mới Thành Công'
-      redirect_to admin_sanphams_path(chitiet)
-    end
-  end
 end
