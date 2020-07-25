@@ -1,6 +1,10 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
+  breadcrumb do
+    ['admin', 'Tài khoản admin']
+  end
 
+  menu label: "Tài khoản admin"
   index do
     selectable_column
     id_column

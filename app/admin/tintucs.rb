@@ -1,6 +1,9 @@
 ActiveAdmin.register Tintuc do
   permit_params :matintuc, :tieude, :ngaybatdau, :ngayketthuc, :mota, :hinhanhtintuc
-
+  breadcrumb do
+    ['admin', 'Tin tức']
+  end
+  menu label: "Tin tức"
   index do
     selectable_column
     id_column

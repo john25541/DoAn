@@ -1,6 +1,10 @@
 ActiveAdmin.register Loaisanpham do
   permit_params :maloai, :danhmuc_id, :tenloai
 
+  breadcrumb do
+    ['admin', 'Loại sản phẩm']
+  end
+  menu :label => "Loại sản phẩm"
   index do
     selectable_column
     id_column
@@ -8,7 +12,7 @@ ActiveAdmin.register Loaisanpham do
     column :tenloai
     actions
   end
-
+  
   filter :maloai
   filter :tenloai
   filter :danhmuc_id
@@ -20,5 +24,5 @@ ActiveAdmin.register Loaisanpham do
       f.input :tenloai, label: 'Tên loại'
     end
     f.actions
-  end 
+  end
 end

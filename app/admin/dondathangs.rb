@@ -1,5 +1,10 @@
 ActiveAdmin.register Dondathang do
   permit_params :madondathang, :ngaydathang, :ngaygiaohang, :tinhtrang
+  breadcrumb do
+    ['admin', 'Đơn đặt hàng']
+  end
+
+  menu label: "Đơn đặt hàng"
 
   index do
     selectable_column

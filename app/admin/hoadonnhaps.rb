@@ -1,5 +1,8 @@
 ActiveAdmin.register Hoadonnhap do
-
+  breadcrumb do
+    ['admin', 'Hóa đơn nhập']
+  end
+  menu label: "Hóa đơn nhập"
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

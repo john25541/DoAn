@@ -1,5 +1,9 @@
 ActiveAdmin.register Khachhang do
   permit_params :email, :password, :password_confirmation	
+  breadcrumb do
+    ['admin', 'Khách hàng']
+  end
+  menu label: "Khách hàng"
   index do	
     selectable_column	
     id_column	

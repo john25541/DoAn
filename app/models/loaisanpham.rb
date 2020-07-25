@@ -5,6 +5,7 @@ class Loaisanpham < ApplicationRecord
   belongs_to :danhmuc
   validates :danhmuc, presence: true
 
+
   def name
     return self.tenloai
   end

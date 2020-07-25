@@ -27,7 +27,7 @@
             <div class="flex items-center top">
               <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
               <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
-              <div class="row">
+              <div class="row" id="product_size">
                 <%@product_details_all.each do |product_detail|%>
                   <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
                 <%end%>
