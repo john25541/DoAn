@@ -1,4 +1,5 @@
 class ChitietdathangsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def new
     @order_item = Chitietdathang.new
@@ -46,5 +47,10 @@ class ChitietdathangsController < ApplicationController
 
   def order_params
     params.fetch(:product_detail, {}).permit(:chitietsp_id, :soluong)
+  end
+
+  def invalid_cart
+    logger.error "Attempt to access invalid cart #{params[:id]}"
+    redirect_to root_path, notice: "Invalid cart"
   end
 end

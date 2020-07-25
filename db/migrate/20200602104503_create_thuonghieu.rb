@@ -1,4 +1,4 @@
-class Thuonghieu < ActiveRecord::Migration[5.1]
+class CreateThuonghieu < ActiveRecord::Migration[5.1]
   def change
     create_table :thuonghieus, { id: false } do |t|
       t.string :mathuonghieu

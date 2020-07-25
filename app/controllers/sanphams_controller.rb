@@ -31,8 +31,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where.not(masanpham: sp.masanpham, giakhuyenmai: [nil, 0])
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @bread = params[:pro]
   end
 
@@ -42,8 +42,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where(masanpham: sp.masanpham)
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @bread = "Sản phẩm"
   end
 
@@ -54,8 +54,8 @@ class SanphamsController < ApplicationController
       pro_cate = cate.sanphams
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @bread = params[:sex]
   end
 
@@ -65,8 +65,8 @@ class SanphamsController < ApplicationController
       pro_cate = Sanpham.where(masanpham: sp.masanpham, loaisanpham_id: params[:id])
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @bread = params[:name]
     @gen = params[:sex]
   end
@@ -78,8 +78,8 @@ class SanphamsController < ApplicationController
       pro_cate = br.sanphams
       @array_product_follow_category << pro_cate
     end
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @array_product_follow_category.delete_if(&:blank?)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
     @bread = params[:brand]
   end
 
@@ -97,6 +97,7 @@ class SanphamsController < ApplicationController
     
     #new line item
     @order_item = current_order.chitietdathangs.new
+    @order_item.valid?
   end
   
   private

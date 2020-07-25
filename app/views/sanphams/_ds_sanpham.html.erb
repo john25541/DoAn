@@ -1,10 +1,10 @@
 <div class="row">
   <% if @array_product_follow_category.empty? %>
   <div class="container" style="padding:300px; text-align:center">
-    <%=link_to(image_tag( 'home.png'),root_path) %>
-    Không có sản phẩm !!!
+    <%=link_to(image_tag('home.png'),root_path) %>
+      <h4>Không có sản phẩm !!!</h4>
     <div style="display: flex; color:rgb(255, 255, 255); justify-content: center;">
-      <%= link_to "Tiếp tục mua sắm", root_path,{style: "background-color: rgb(255, 47, 47); padding: 5px 12px; color: #fff; border-radius: 10px;" } %>
+      <%= link_to "Tiếp tục mua sắm", root_path,{style: "background-color: rgb(255, 47, 47); padding: 5px 12px; color: #fff; border-radius: 10px;text-decoration:none;" } %>
     </div>
   </div>
   <% else %>
