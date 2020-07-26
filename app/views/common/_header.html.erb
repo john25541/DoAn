@@ -44,15 +44,16 @@
     </form>
     <div class="nav-item" >
       <%= link_to image_tag("cart_.png", class: 'img_cart' ,'aria-hidden' => true), carts_path, {:action=>"show", :controller=>"carts"}%>
-      <div class="dropdown">
-        <div id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-          <div id="add_to_cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="display:none; background-color:#fff; width:200px; height:50px; border: 2px solid #000;text-align:center; margin-top:20px; margin-left:-30px; ">
-            <i class="fas fa-check-circle" style="color:rgb(102, 255, 0);"></i>
-            <span class="align-middle" >
-              "Thêm thành công!"  
-            </span>
-          </div>
-        </div>
+      <div class= "rounded-circle">
+        <span id="cart"
+            <% if session[:cart].nil? %>
+                0
+            <% end %>
+              >
+          <% unless session[:cart].nil?%>
+            <%= session[:cart].length%>
+          <% end %>
+        </span>
       </div>
     </div>
     <div>

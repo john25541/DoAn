@@ -10,8 +10,8 @@
           <p class="card-text" id="address"></p>
           <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
         </div>
-        <div class="card-footer">
-          <button id="btn_edit" class="btn btn-outline-dark">Sửa</button>
+        <div class="card-footer" align="center">
+          <button id="btn_edit" class="btn btn-dark">Sửa</button>
         </div>
       </div>
     </div>
@@ -24,40 +24,29 @@
       <div class ="col-md-12">
         <h5 class = "text-center">Đơn hàng (<%=@order_items.collect{|order_item| order_item.soluong}.sum%> sản phẩm)</h5>
         <br>
-        <table>
+        <table class="table">
           <tbody>
             <%@order_items.each do |item|%>
               <tr>
-                <td class = "col-sm-8"><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
-                <td class = "col-sm-4"><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
+                <td><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
+                <td><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
               </tr>
             <%end%>
           </tbody>
           <tfoot>
             <tr>
-              <td class = "col-sm-8">Tổng tiền</td>
-              <td class = "col-sm-4 font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
+              <td>Tổng tiền</td>
+              <td class = "font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
             </tr>
           </tfoot>
         </table>
         <br>
-        <p class="text-center">Bạn sẽ được miễn phí ship khi đơn hàng của bạn có tổng giá trị trên 3.000.000<sup>đ</sup></p>
+        <p class="text-center">Quý khách vui lòng kiểm tra hóa đơn trước khi đặt hàng</p>
         <%=form_for @dondathang do |f|%>
-          <%f.submit "ĐẶT MUA" , class: "btn btn-primary btn-lg btn-block"%>
+          <%f.submit "ĐẶT MUA" , class: "btn btn-danger btn-lg btn-block"%>
         <%end%>
       </div>  
     </div>
   </div>
 </div>
-<!--######################################################## --->
-<script>
-  $(document).ready(function(){
-      $("#user_profile").hide();
-      $("#btn_edit").click(function(){
-          $("#user_profile").show("slow");
-      })
-      $("#btn_cancel").click(function(){
-          $("#user_profile").hide("slow");
-      })
-  })
-</script>
+
