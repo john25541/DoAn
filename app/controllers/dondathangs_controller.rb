@@ -27,7 +27,6 @@ class DondathangsController < ApplicationController
 
   def create
     cart = session[:cart]
-    binding.pry
     @dondathang = current_khachhang.dondathangs.create(dondathang_params)
     respond_to do |format|
       if @dondathang.save

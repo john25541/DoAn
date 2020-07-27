@@ -16,4 +16,13 @@ ActiveAdmin.register Chitietsp do
       end
     end
   end
+  form do |f|
+    f.inputs "Chi tiết sản phẩm" do
+      f.input :mausp , label: 'Màu sản phẩm: '
+      f.input :size, label: 'Size: '
+      f.input :soluongton, label: 'Số lượng tồn: '
+      f.input :hinhanhsp, label: 'Hình ảnh sản phẩm: '
+    end
+    f.actions
+  end
 end

@@ -1,6 +1,6 @@
 class Chitietdathang < ApplicationRecord
 
-  belongs_to :dondathang 
+  belongs_to :dondathang,  foreign_key: "dondathang_id"
   belongs_to :chitietsp 
 
   before_save :set_into_money

@@ -6,7 +6,5 @@ class CreateChitietdathangs < ActiveRecord::Migration[5.1]
       t.integer :soluong 
       t.decimal :thanhtien
     end
-    add_index :chitietdathangs, ["chitietsp_id", "dondathang_id"], :unique => true
   end
-
 end

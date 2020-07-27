@@ -1,7 +1,8 @@
 class Dondathang < ApplicationRecord
   self.primary_key = :madondathang
 
-  has_many :chitietdathangs, dependent: :delete_all
+  has_many :chitietdathangs, foreign_key: 'dondathang_id'
+
   belongs_to :khachhang
 
   before_save :set_order_id

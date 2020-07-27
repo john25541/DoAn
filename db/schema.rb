@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20200721174038) do
     t.string "dondathang_id"
     t.integer "soluong"
     t.decimal "thanhtien"
-    t.index ["chitietsp_id", "dondathang_id"], name: "index_chitietdathangs_on_chitietsp_id_and_dondathang_id", unique: true
   end
 
   create_table "chitietsps", primary_key: "machitietsp", id: :string, force: :cascade do |t|
