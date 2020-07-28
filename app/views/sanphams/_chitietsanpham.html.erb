@@ -23,7 +23,7 @@
           <div class="flex items-center">
             <span class="text-black">Size:</span>
           </div>
-          <%=form_for @order_item, as: :product_detail  do |f|%>
+          <%=form_for @order_item, as: :product_detail do |f|%>
             <div class="flex items-center top">
               <%= f.hidden_field :sanpham_id, :value => @product.masanpham %>
               <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
@@ -32,14 +32,18 @@
                   <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
                 <%end%>
               </div>
-              <div class="row">
-                <%=f.number_field :soluong, value: 1 , :min =>  1%>
+              <div class="flex items-center top">
+                <span class="text-black">Số lượng:&nbsp;&nbsp;&nbsp;&nbsp;</span><%=f.number_field :soluong, value: 1 , min: 1, required: true%></p>
               </div>
-            </div>
-            <div class="flex items-center topv">
-              <%= f.submit "Thêm Vào Giỏ Hàng", class: "button_to buy", remote: true%>
+            </div>            
+            <% if @product.giaban <= 0 %>
+              <td style=" padding-left:86px">
+                <h5 style="color:#ff0000"> Hết Hàng </h5>
+              </td>
+            <% else %>
+              <%= f.submit "Thêm Vào Giỏ Hàng", class: "button_to buy", id: "js-addItemToCart" %>
               <%= f.submit "Mua ngay",class: "button_to now"%>
-            </div>
+            <%end%>
           <%end%>
         </div>
       </div>
@@ -49,7 +53,7 @@
       <%@image_product_same.each do |key, values|%>
         <div class="col-4 col-sm-3">
           <div class="vitem">
-            <%=link_to(image_tag( values ,{:style => "width:100px; height:130px;"}),sanpham_path(@product, color: key))unless values.blank? %>
+            <%=link_to(image_tag( values ,{style: "width:100px; height:130px;"}),sanpham_path(@product, color: key))unless values.blank? %>
             <p><%=key%></p>
           </div>
         </div>

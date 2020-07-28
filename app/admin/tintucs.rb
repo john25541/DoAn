@@ -4,7 +4,7 @@ ActiveAdmin.register Tintuc do
     ['admin', 'Tin tức']
   end
   menu label: "Tin tức"
-  index do
+  index title: "Tin tức" do
     selectable_column
     id_column
     column :matintuc

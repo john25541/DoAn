@@ -16,7 +16,7 @@ ActiveAdmin.register Khachhang do
     actions	
   end	
 
-  form do |f|	
+  form  do |f|	
     f.inputs do	
       f.input :email	
       f.input :password	

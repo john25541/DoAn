@@ -4,7 +4,7 @@ class Chitietsp < ApplicationRecord
   belongs_to :sanpham
   has_many :chitietdathangs
   has_and_belongs_to_many :dondathangs
-  before_save :set_chitietsanpham_id
+  before_create :set_chitietsanpham_id
 
   validates :mausp, :size, :hinhanhsp, :soluongton ,presence: true
   mount_uploader :hinhanhsp, HinhanhspUploader

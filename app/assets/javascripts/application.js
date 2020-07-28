@@ -19,7 +19,16 @@
 
 
 $(document).ready(function () {
-    $(".sort_paginate_ajax .justify-content-end a").attr('data-remote', 'true')
+    $(".sort_paginate_ajax .justify-content-end a").attr('data-remote', 'true');
+
+    $('#js-addItemToCart').click(function (e) {
+        $("#new_product_detail").attr('data-remote', 'true');
+        alert('Sản phẩm đã thêm vào giỏ hàng!');
+        setInterval(function() {
+            location.reload();
+        }, 1250);
+        e.preventDefault();
+    });
 });
 
 function findGetParameter(parameterName) {
@@ -52,8 +61,3 @@ $(document).on('turbolinks:load', function () {
         $("input[data-sorttype='desc']").prop("checked", true);
     }
 });
-
-$(document).ready(function () {
-    var value = $("#dondathang_diachigiaohang").val();
-    $("#address").text("Địa chỉ: " + value);
-})

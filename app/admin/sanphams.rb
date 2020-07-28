@@ -4,6 +4,7 @@ ActiveAdmin.register Sanpham do
   breadcrumb do
     ["admin", "Sản phẩm"]
   end
+
   menu label: "Sản phẩm"
   index title: "Sản phẩm" do
     selectable_column
@@ -44,9 +45,11 @@ ActiveAdmin.register Sanpham do
       end
     end
   end
-  form title: "Thêm sản phẩm" do |f|
+  form only: :new, title: "Thêm sản phẩm"  do |f|
     f.object.masanpham = "SP#{Time.now().to_i}"
     f.inputs "Sản phẩm" do
+      #show error
+      # f.semantic_errors *f.object.errors.keys
       f.input :masanpham, label: "Mã sản phẩm: " 
       f.input :loaisanpham_id, label: "Loại sản Phẩm: ", as: :select, :collection => Loaisanpham.all.map { |loaisp| [loaisp.tenloai, loaisp.maloai] }
       f.input :thuonghieu_id, as: :select, :collection => Thuonghieu.all.map { |thuonghieu| [thuonghieu.tenthuonghieu, thuonghieu.mathuonghieu] }, label: "Thương hiệu: "
@@ -60,7 +63,7 @@ ActiveAdmin.register Sanpham do
         form.input :mausp, label: "Màu sản phẩm: "
         form.input :size, label: "Size: "
         form.input :soluongton, label: "Số lượng" , as: :number
-        form.input :hinhanhsp, label: "Mã Loại" ,  as: :file     
+        form.input :hinhanhsp, label: "Mã Loại" ,  as: :file 
       end
     end
     f.actions

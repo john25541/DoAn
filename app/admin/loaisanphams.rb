@@ -5,7 +5,7 @@ ActiveAdmin.register Loaisanpham do
     ['admin', 'Loại sản phẩm']
   end
   menu :label => "Loại sản phẩm"
-  index do
+  index title: "Loại Sản phẩm" do
     selectable_column
     id_column
     column :danhmuc_id
@@ -20,7 +20,6 @@ ActiveAdmin.register Loaisanpham do
   form do |f|
     f.inputs do
       f.input :danhmuc_id , label: 'Danh mục sản phẩm', as: :select, :collection => Danhmuc.all.map{|danhmuc| [danhmuc.tendanhmuc, danhmuc.madanhmuc]}
-      f.input :maloai , label: 'Mã loại'
       f.input :tenloai, label: 'Tên loại'
     end
     f.actions

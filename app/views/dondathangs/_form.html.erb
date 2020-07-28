@@ -34,7 +34,7 @@
     <h5 class = "col-md-10 text-right">Tổng Tiền: <%=@order_items.collect{|item| item.soluong * item.chitietsp.sanpham.giaban}.sum%></h5>
   </div>
   <div class="card-footer">
-    <%if @order.tinhtrang == "Đơn hàng đang chờ xử lý"%>
+    <%if @order.tinhtrang == "Đơn hàng đang chờ xử lý" || @order.tinhtrang == "Đơn hàng đã tiếp nhận"%>
       <%=link_to "Hủy", cancel_order_path(@order.madondathang), class: "btn btn-danger" %>
     <%end%>
   </div>

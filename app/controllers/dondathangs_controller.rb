@@ -1,6 +1,7 @@
 class DondathangsController < ApplicationController
   before_action :set_dondathang, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_khachhang!, only: [:new]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def index
     if khachhang_signed_in?
@@ -64,5 +65,10 @@ class DondathangsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def dondathang_params
       params.require(:dondathang).permit(:diachigiaohang)
+    end
+
+    def invalid_cart
+      logger.error "Attempt to access invalid cart #{params[:id]}"
+      redirect_to root_path, notice: "Invalid cart"
     end
 end

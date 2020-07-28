@@ -24,7 +24,7 @@
               <td><%=order.tinhtrang%></td>
               <td></td>
               <td>
-                <%=button_to "Chi tiết đơn hàng", dondathang_path(order ), method: :get%>
+                <%=link_to "Chi tiết đơn hàng", dondathang_path(order ), class: "btn btn-info"%>
               </td>
             </tr>
           </tbody>

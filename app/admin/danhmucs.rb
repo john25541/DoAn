@@ -20,12 +20,10 @@ ActiveAdmin.register Danhmuc do
 
   form do  |f|
     f.inputs 'tạo mới danh mục'  do
-      f.input :madanhmuc , label: 'Mã danh mục'
       f.input :tendanhmuc, label: 'Tên danh mục'
     end
     f.inputs 'Loai sản phẩm' do
       f.has_many :loaisanphams do |form|
-        form.input :maloai, label: "Mã Loại"
         form.input :tenloai, label: "Tên Loại"          
       end
     end
