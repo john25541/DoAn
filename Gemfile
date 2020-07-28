@@ -42,7 +42,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'activeadmin'
 gem 'active_admin_flat_skin'
 
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.3.1'
 
 gem 'jquery-rails'
 
