@@ -28,53 +28,92 @@
                   <span class="input-group-text"><i class="far fa-envelope"></i></span>
                 </div >
                 <%=f.email_field :email,class:"form-control", style: "width: 359px;", placeholder: "Email", autofocus: true, autocomplete: "email"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Email can't be blank"%>
+                      <div id="error_explanation" style="color:white;">
+                        Tên tài khoản không hợp lệ !
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
               </div>
-              <% if resource.errors.any? %>
-                <% resource.errors.full_messages.each do |message| %>
-                  <%if message ==  "Email can't be blank"%>
-                    <div id="error_explanation" style="color:white;">
-                      Tên tài khoản không hợp lệ !
-                    </div>
-                  <%end%>
-                <% end %>
-              <%end%>
-              <br>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <%=f.password_field :password,class:"form-control", style: "width: 359px;", placeholder: "Mật khẩu", autocomplete: "new-password"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Password can't be blank"%>
+                      <div id="error_explanation" style="color:white;">
+                        Mật khẩu không thể bỏ trống !
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
               </div>
-              <% if resource.errors.any? %>
-                <% resource.errors.full_messages.each do |message| %>
-                  <%if message ==  "Password can't be blank"%>
-                    <div id="error_explanation" style="color:white;">
-                      Mật khẩu không thể bỏ trống !
-                    </div>
-                  <%end%>
-                <% end %>
-              <%end%>
-              <br>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <%=f.password_field :password_confirmation, class:"form-control",style: "width: 359px;", placeholder: "Nhập lại mật khẩu", autocomplete: "new-password"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Password confirmation doesn't match Password"%>
+                      <div id="error_explanation" style="color:white;">
+                        Xác nhận không khớp với Mật khẩu !
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
               </div>
-              <% if resource.errors.any? %>
-                <% resource.errors.full_messages.each do |message| %>
-                  <%if message ==  "Password confirmation doesn't match Password"%>
-                    <div id="error_explanation" style="color:white;">
-                      Xác nhận không khớp với Mật khẩu !
-                    </div>
-                  <%end%>
-                <% end %>
-              <%end%>
-              <!--
-              <div class="row align-items-center remember">
-                <%= f.check_box :remember_me%>Tôi đồng ý &nbsp<%=link_to "Điều khoản dịch vụ" %>
+              <br>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <%=f.text_field :hotenkhachhang,class:"form-control", style: "width: 359px;", placeholder: "Họ và tên", autocomplete: "new-hotenkhachhang"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Hotenkhachhang can't be blank"%>
+                      <div id="error_explanation" style="color:white;">
+                        Họ và tên không thể bỏ trống !
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
               </div>
-              -->
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                </div>
+                <%=f.text_field :sodienthoai,class:"form-control", style: "width: 359px;", placeholder: "Số điện thoại", autocomplete: "new-sodienthoai"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Sodienthoai can't be blank" || message ==  "Sodienthoai is not a number" || message ==  "Sodienthoai is too short (minimum is 10 characters)" %>
+                      <div id="error_explanation" style="color:white;">
+                        số điện thoại không đúng!
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
+              </div>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-home"></i></span>
+                </div>
+                <%=f.text_field :diachi,class:"form-control", style: "width: 359px;", placeholder: "Địa chỉ", autocomplete: "new-diachi"%>
+                <% if resource.errors.any? %>
+                  <% resource.errors.full_messages.each do |message| %>
+                    <%if message ==  "Diachi can't be blank"%>
+                      <div id="error_explanation" style="color:white;">
+                        địa chỉ không thể bỏ trống !
+                      </div>
+                    <%end%>
+                  <% end %>
+                <%end%>
+              </div>
               <div class="form-group">
                 <%=f.submit "Đăng ký", class: "btn float-right login_btn",style:"width:130px"%>
               </div>

@@ -1,4 +1,8 @@
 ActiveAdmin.register Nhacungcap do
+  breadcrumb do
+    ['admin', 'Nhà cung cấp']
+  end
+  menu label: "Nhà cung cấp"
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

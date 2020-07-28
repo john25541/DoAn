@@ -1,5 +1,8 @@
 ActiveAdmin.register Thuonghieu do
-
+  breadcrumb do
+    ['admin', 'Thương hiệu']
+  end
+  menu label: "Thương hiệu"
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
