@@ -1,18 +1,32 @@
 ActiveAdmin.register Danhmuc do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :madanhmuc, :tendanhmuc
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:madanhmuc, :tendanhmuc]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params :madanhmuc, :tendanhmuc,loaisanphams_attributes: [:maloai, :danhmuc_id,:tenloai]
+  breadcrumb do
+    ['admin', 'Danh Mục']
+  end
   
+  menu :label => "Danh mục"
+
+  index title: "Danh mục" do
+    selectable_column
+    id_column
+    column :tendanhmuc
+
+    actions
+  end
+  
+
+  filter :madanhmuc
+  filter :tendanhmuc
+
+  form do  |f|
+    f.inputs 'tạo mới danh mục'  do
+      f.input :tendanhmuc, label: 'Tên danh mục'
+    end
+    f.inputs 'Loai sản phẩm' do
+      f.has_many :loaisanphams do |form|
+        form.input :tenloai, label: "Tên Loại"          
+      end
+    end
+    f.actions
+  end
 end

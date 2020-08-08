@@ -44,6 +44,17 @@ class DondathangsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @dondathang.update(dondathang_params)
+        format.html { redirect_to @dondathang}
+        format.json { render :show, status: :ok, location: @dondathang }
+      else
+        format.html { render :edit }
+        format.json { render json: @dondathang.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -53,7 +64,7 @@ class DondathangsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dondathang_params
-      params.fetch(:dondathang, {})
+      params.require(:dondathang).permit(:diachigiaohang)
     end
 
     def invalid_cart

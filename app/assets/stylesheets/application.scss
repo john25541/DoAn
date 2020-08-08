@@ -11,8 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  */
-
-
 /*
  /= require jquery-ui
  */
@@ -351,7 +349,7 @@
     stroke: #ee4d2d;
 }
 
-.row{
+.row #product_size{
     input[type="radio"]{
         position: absolute;
         opacity: 0;

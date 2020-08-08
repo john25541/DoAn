@@ -1,42 +1,38 @@
 <br>
 <div class = "container col-xl-10 align-self-center">
+  <%=form_for @dondathang do |f|%>
   <div class="row">
-    <div class="col-sm-12 col-md-4 ">
+    <div class="col-sm-8 col-md-4 ">
       <h4>Địa chỉ giao hàng</h4>
       <br>
       <div class="card bg-light border-info mb-3" style="max-width: 28rem;">
         <div class="card-body">
           <p class="card-text">Họ và tên: <%=current_khachhang.hotenkhachhang%></p>
-          <p class="card-text" id="address"></p>
+          <p class="card-text">
+            <%=f.label :"Địa chỉ giao hàng: "%>
+            <%=f.text_field :diachigiaohang, :value => current_khachhang.diachi %>
+          </p>
           <p class="card-text">Số điện thoại: <%=current_khachhang.sodienthoai%></p>
         </div>
-        <div class="card-footer" align="center">
-          <button id="btn_edit" class="btn btn-dark">Sửa</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-4 ">
-      <div id="user_profile">
-        <%=render "dondathangs/user_profile"%>
       </div>
     </div>
     <div class = "col-md-4 col-sm-4">
       <div class ="col-md-12">
         <h5 class = "text-center">Đơn hàng (<%=@order_items.collect{|order_item| order_item.soluong}.sum%> sản phẩm)</h5>
         <br>
-        <table class="table">
+        <table>
           <tbody>
             <%@order_items.each do |item|%>
               <tr>
-                <td><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
-                <td><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
+                <td class = "col-sm-8"><%=item.soluong%>X - <%=item.chitietsp.sanpham.tensanpham%>-<%=item.chitietsp.size%></td>
+                <td class = "col-sm-4"><%= number_to_currency(item.thanhtien, precision: 0, unit: "", delimiter: ".", format: "%n %u")%></td>
               </tr>
             <%end%>
           </tbody>
           <tfoot>
             <tr>
-              <td>Tổng tiền</td>
-              <td class = "font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
+              <td class = "col-sm-8">Tổng tiền</td>
+              <td class = "col-sm-4 font-weight-bold"><%= number_to_currency(@order_items.collect{|order_item| order_item.chitietsp.sanpham.giaban*order_item.soluong}.sum, precision: 0, unit: "đ", delimiter: ".", format: "%n %u")%></td>
             </tr>
           </tfoot>
         </table>
@@ -48,5 +44,6 @@
       </div>  
     </div>
   </div>
+  <%end%>
 </div>
 
