@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
-  devise_for :khachhangs
+  devise_for :khachhangs,
+              path: '',
+              path_names: {sign_in: 'login' ,sign_out: 'logout' ,edit: 'profile',sign_up: 'resgistration'},
+              controllers: {omniauth_callbacks: 'omniauth_callbacks' }
   get "khachhangs/profile"
   put "khachhangs/update_info"
   get "khachhangs/update_info"

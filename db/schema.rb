@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200810073552) do
+ActiveRecord::Schema.define(version: 20200812173323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20200810073552) do
   end
 
   create_table "chitietkms", force: :cascade do |t|
+    t.string "sanpham_id"
+    t.string "khuyenmai_id"
+    t.decimal "giakhuyenmai"
   end
 
   create_table "chitietsps", primary_key: "machitietsp", id: :string, force: :cascade do |t|
@@ -85,6 +88,8 @@ ActiveRecord::Schema.define(version: 20200810073552) do
     t.string "diachi"
     t.string "sodienthoai"
     t.date "ngaysinh"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_khachhangs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_khachhangs_on_reset_password_token", unique: true
   end

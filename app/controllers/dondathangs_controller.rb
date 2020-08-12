@@ -32,10 +32,15 @@ class DondathangsController < ApplicationController
     respond_to do |format|
       if @dondathang.save
         @order_items = Chitietdathang.joins(:chitietsp).find(session[:cart])
-        @order_items.each  do |item| 
-          item.dondathang_id = @dondathang.id
-          item.save
+        @order_items.each  do |chitietdathang| 
+          chitietdathang.dondathang_id = @dondathang.id
+          chitietdathang.save
+          chitietsanpham = Chitietsp.find(chitietdathang.chitietsp_id)
+          # binding.pry
+          chitietsanpham.update_attribute(:soluongton, chitietsanpham.soluongton - chitietdathang.soluong)
+          
         end
+        
         session[:cart].clear
         OrderMailer.received(@dondathang).deliver_later
         format.html { render "dondathangs/success" }

@@ -49,6 +49,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 gem 'devise'
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
 
 gem 'cancancan'
 
