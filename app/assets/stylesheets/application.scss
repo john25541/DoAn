@@ -353,6 +353,8 @@
     input[type="radio"]{
         position: absolute;
         opacity: 0;
+        margin-left: 90px;
+        margin-top: -10px;
         +.product-size {
             cursor: pointer;
             box-sizing: border-box;

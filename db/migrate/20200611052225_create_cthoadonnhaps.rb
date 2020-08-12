@@ -5,7 +5,6 @@ class CreateCthoadonnhaps < ActiveRecord::Migration[5.1]
       t.string :tensanphamnhap
       t.integer :soluongnhap
       t.decimal :dongia
-
     end
   end
 end
