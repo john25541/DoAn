@@ -29,13 +29,16 @@
               <%= f.hidden_field :mausp, :value => @product_detail.mausp %>
               <div class="row" id="product_size">
                 <%@product_details_all.each do |product_detail|%>
-                  <%=radio_button_tag :product_size, product_detail.size%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
+                  <%=radio_button_tag :product_size, product_detail.size, false, {disabled: (product_detail.soluongton <= 0 ? true : false)}%><label for="<%="product_size_" + product_detail.size%>" class="product-size"><%=product_detail.size%></label>
                 <%end%>
               </div>
               <div class="flex items-center top">
                 <span class="text-black">Số lượng:&nbsp;&nbsp;&nbsp;&nbsp;</span><%=f.number_field :soluong, value: 1 , min: 1, required: true%></p>
               </div>
-            </div>            
+            </div>    
+            <div class="flex items-center top">
+              <i class="far fa-edit">&nbsp;&nbsp;<%= link_to 'Hướng dẫn chọn size', trangchu_huongdanchonsize_path, class: "fw-normal"%></i>
+            </div>        
             <% if @product.giaban <= 0 %>
               <td style=" padding-left:86px">
                 <h5 style="color:#ff0000"> Hết Hàng </h5>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200721174026) do
+ActiveRecord::Schema.define(version: 20200810073552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,15 @@ ActiveRecord::Schema.define(version: 20200721174026) do
     t.decimal "thanhtien"
   end
 
+  create_table "chitietkms", force: :cascade do |t|
+  end
+
   create_table "chitietsps", primary_key: "machitietsp", id: :string, force: :cascade do |t|
     t.string "sanpham_id"
     t.string "mausp"
     t.string "size"
     t.text "hinhanhsp"
     t.integer "soluongton"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "cthoadonnhaps", id: false, force: :cascade do |t|
@@ -68,8 +69,6 @@ ActiveRecord::Schema.define(version: 20200721174026) do
     t.string "mahoadonnhap"
     t.date "ngapnhap"
     t.decimal "thanhtien"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "khachhangs", force: :cascade do |t|
@@ -88,6 +87,14 @@ ActiveRecord::Schema.define(version: 20200721174026) do
     t.date "ngaysinh"
     t.index ["email"], name: "index_khachhangs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_khachhangs_on_reset_password_token", unique: true
+  end
+
+  create_table "khuyenmais", primary_key: "makhuyenmai", id: :string, force: :cascade do |t|
+    t.string "tenkhuyenmai"
+    t.datetime "ngaybatdau"
+    t.datetime "ngayketthuc"
+    t.decimal "KMtheogia"
+    t.float "KMtheophantram"
   end
 
   create_table "loaisanphams", primary_key: "maloai", id: :string, force: :cascade do |t|

@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   resources :loaisanphams
 
   get 'trangchu/index'
+  get 'trangchu/huongdanchonsize'
   root "trangchu#index"
 end

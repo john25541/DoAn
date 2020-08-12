@@ -32,7 +32,7 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category.delete_if(&:blank?)
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 20)
     @bread = params[:pro]
   end
 
@@ -43,7 +43,7 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category.delete_if(&:blank?)
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 20)
     @bread = "Sản phẩm"
   end
 
@@ -55,7 +55,7 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category.delete_if(&:blank?)
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 20)
     @bread = params[:sex]
   end
 
@@ -66,7 +66,7 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category.delete_if(&:blank?)
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 20)
     @bread = params[:name]
     @gen = params[:sex]
   end
@@ -79,7 +79,7 @@ class SanphamsController < ApplicationController
       @array_product_follow_category << pro_cate
     end
     @array_product_follow_category.delete_if(&:blank?)
-    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 19)
+    @array_product_follow_category = @array_product_follow_category.paginate(page: params[:page], per_page: 20)
     @bread = params[:brand]
   end
 

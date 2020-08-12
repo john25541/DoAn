@@ -7,8 +7,6 @@ class CreateChitietsps < ActiveRecord::Migration[5.1]
       t.string  :size
       t.text    :hinhanhsp
       t.integer :soluongton
-      
-      t.timestamps
     end
     execute ("ALTER TABLE chitietsps ADD PRIMARY KEY (machitietsp)")
   end
