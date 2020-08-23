@@ -6,7 +6,7 @@ class Chitietsp < ApplicationRecord
   has_and_belongs_to_many :dondathangs
   before_create :set_chitietsanpham_id
 
-  validates :mausp, :size, :soluongton ,presence: true
+  validates :mausp, :size, :soluongton, :hinhanhsp ,presence: true
   mount_uploader :hinhanhsp, HinhanhspUploader
 
   def set_chitietsanpham_id

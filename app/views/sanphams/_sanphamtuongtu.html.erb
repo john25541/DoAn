@@ -7,8 +7,8 @@
         <%break%>
       <%end%>
       <div class="col-xs-12 col-md-2">
-        <%=link_to(image_tag(el.chitietsps.first.hinhanhsp ,style: "width:100px; height:130px;"), el) %>
-        <p><%= link_to el.tensanpham, el, class: "fw-normal" %></p>
+        <%=link_to(image_tag(el.chitietsps.first.hinhanhsp ,style: "width:100px; height:130px;"), sanpham_path(el, color: el.chitietsps.first.mausp)) %>
+        <p><%=link_to el.tensanpham, sanpham_path(el, color: el.chitietsps.first.mausp), class: "fw-normal" %></p>
       </div>
   <%end%>
 </div>

@@ -48,7 +48,7 @@ Sanpham.create!(
         machitietsp: '0019087001',
         mausp: 'Trắng',
         size: 'S',
-        hinhanhsp: 'aothun2.jpg',
+        hinhanhsp: "aothun2.jpg",
         soluongton: 100,
     },
     {
